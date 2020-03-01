@@ -15,10 +15,10 @@
                 <el-dropdown-item command="ja" v-if="$i18n.locale != 'ja'">日本語</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
-        <el-button type="text" :icon="`el-icon ${isShowMenu ? 'el-icon-close' : 'el-icon-menu'}`" @click="onClick_toggleShowMenu"></el-button>
+        <el-button type="text" v-if="showMenu" :icon="`el-icon ${isShowMenu ? 'el-icon-close' : 'el-icon-menu'}`" @click="onClick_toggleShowMenu"></el-button>
     </div>
     <transition name="el-zoom-in-top">
-        <ul class="header-menu" v-show="isShowMenu">
+        <ul class="header-menu" v-if="showMenu" v-show="isShowMenu">
             <li :class="$route.name == 'Home' ? 'active' : ''" @click="onClick_changeItem('Home')">首页</li>
             <li :class="$route.name == 'ArticleList' ? 'active' : ''" @click="onClick_changeItem('ArticleList')">文章</li>
             <li :class="$route.name == 'Category' ? 'active' : ''" @click="onClick_changeItem('Category')">相册</li>
@@ -31,6 +31,12 @@
 <script>
 export default {
     name: "mainMenu",
+    props: {
+        showMenu: {
+            type: Boolean,
+            default: true
+        }
+    },
     data() {
         return {
             isShowMenu: window.innerWidth < 1000 ? false : true

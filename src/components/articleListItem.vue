@@ -36,7 +36,6 @@ $mutedColor: #a7abb3;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        font-weight: 400;
     }
 
     h4,
@@ -48,9 +47,11 @@ $mutedColor: #a7abb3;
         color: $titleColor;
         margin: 0;
         font-size: 24px;
+        font-weight: 500;
     }
 
     h4 {
+        font-weight: 400;
         margin: 0;
         font-size: 16px;
     }
