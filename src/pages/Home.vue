@@ -65,31 +65,39 @@ export default {
         position: relative;
     }
 
-    .el-header {
-        height: fit-content;
+    .home-left,
+    .home-right {
+        height: 100%;
     }
 
-    .home-left-content {
-        width: 80%;
-        text-align: left;
-        position: absolute;
-        top: 40%;
-        left: 10%;
+    .home-left {
+        .home-left-content {
+            width: 80%;
+            text-align: left;
+            position: absolute;
+            top: 40%;
+            left: 10%;
 
-        h1,
-        p {
-            font-size: 1.5em;
-            margin: 0;
-            line-height: 2;
+            h1,
+            p {
+                font-size: 1.5em;
+                margin: 0;
+                line-height: 2;
+            }
+
+            .el-button {
+                float: right;
+            }
         }
 
-        .el-button {
-            float: right;
+        .home-left-content:after {
+            content: "";
+            display: block;
+            clear: both;
         }
     }
 
     .home-right {
-        height: 100%;
         flex: 0 0 40%;
 
         .home-main-container {

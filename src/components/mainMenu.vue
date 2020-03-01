@@ -17,10 +17,10 @@
     </div>
     <transition name="el-zoom-in-top">
         <ul class="header-menu" v-show="isShowMenu">
-            <li class="active">首页</li>
-            <li>主题</li>
-            <li>相册</li>
-            <li>关于</li>
+            <li :class="$route.name == 'Home' ? 'active' : ''" @click="onClick_changeItem('Home')">首页</li>
+            <li :class="$route.name == 'Article' ? 'active' : ''" @click="onClick_changeItem('Article')">主题</li>
+            <li :class="$route.name == 'Category' ? 'active' : ''" @click="onClick_changeItem('Category')">相册</li>
+            <li :class="$route.name == 'About' ? 'active' : ''" @click="onClick_changeItem('About')">关于</li>
         </ul>
     </transition>
 </div>
@@ -41,6 +41,11 @@ export default {
             } else {
                 this.isShowMenu = true;
             }
+        },
+        onClick_changeItem: function(routeName) {
+            this.$router.push({
+                name: routeName
+            });
         }
     }
 }
@@ -108,7 +113,7 @@ $lightColor: #eaeaea;
 
 @media screen and (min-width: 1000px) {
     .header-menu {
-        position: absolute;
+        position: fixed;
         top: 50px;
         right: 50px;
     }
