@@ -1,6 +1,8 @@
 <template>
 <div class="header-container">
-    <el-avatar :size="40"></el-avatar>
+    <el-badge is-dot :hidden="true">
+        <el-avatar :size="40"></el-avatar>
+    </el-badge>
     <div class="header-right">
         <el-dropdown>
             <span class="header-dropdown-link">
@@ -18,7 +20,7 @@
     <transition name="el-zoom-in-top">
         <ul class="header-menu" v-show="isShowMenu">
             <li :class="$route.name == 'Home' ? 'active' : ''" @click="onClick_changeItem('Home')">首页</li>
-            <li :class="$route.name == 'Article' ? 'active' : ''" @click="onClick_changeItem('Article')">主题</li>
+            <li :class="$route.name == 'ArticleList' ? 'active' : ''" @click="onClick_changeItem('ArticleList')">文章</li>
             <li :class="$route.name == 'Category' ? 'active' : ''" @click="onClick_changeItem('Category')">相册</li>
             <li :class="$route.name == 'About' ? 'active' : ''" @click="onClick_changeItem('About')">关于</li>
         </ul>
@@ -115,7 +117,7 @@ $lightColor: #eaeaea;
     .header-menu {
         position: fixed;
         top: 50px;
-        right: 50px;
+        right: 150px;
     }
 }
 

@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Home from './../pages/Home';
 import NotFound from './../pages/404';
 import About from './../pages/About';
+import ArticleList from './../pages/ArticleList';
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [{
 	path: "/about",
 	name: 'About',
 	component: About
+},
+{
+	path: "/article",
+	name: 'ArticleList',
+	component: ArticleList
 }]
 
 const router = new VueRouter({
