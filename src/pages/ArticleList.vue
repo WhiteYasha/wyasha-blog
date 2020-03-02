@@ -70,11 +70,13 @@ $titleColor: #18191b;
 
 .home-container {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     padding-top: 30px;
 }
 
 .list-container {
+    width: 100%;
+    height: 100%;
     text-align: left;
 
     .list-left-footer {

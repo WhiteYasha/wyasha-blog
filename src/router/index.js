@@ -7,6 +7,7 @@ import About from './../pages/About';
 import ArticleList from './../pages/ArticleList';
 import Article from './../pages/Article';
 import Login from './../pages/Login';
+import Blink from './../pages/Blink';
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [{
 		path: "/login",
 		name: "Login",
 		component: Login
+	},
+	{
+		path: "/blink",
+		name: "Blink",
+		component: Blink
 	}
 ];
 

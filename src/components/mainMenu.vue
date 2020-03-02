@@ -21,7 +21,7 @@
         <ul class="header-menu" v-if="showMenu" v-show="isShowMenu">
             <li :class="$route.name == 'Home' ? 'active' : ''" @click="onClick_changeItem('Home')">首页</li>
             <li :class="$route.name == 'ArticleList' ? 'active' : ''" @click="onClick_changeItem('ArticleList')">文章</li>
-            <li :class="$route.name == 'Category' ? 'active' : ''" @click="onClick_changeItem('Category')">相册</li>
+            <li :class="$route.name == 'Blink' ? 'active' : ''" @click="onClick_changeItem('Blink')">动态</li>
             <li :class="$route.name == 'About' ? 'active' : ''" @click="onClick_changeItem('About')">关于</li>
         </ul>
     </transition>
@@ -110,7 +110,7 @@ $lightColor: #eaeaea;
         color: $lightColor;
         transition: opacity .5;
         border-radius: 3px;
-        z-index: 5000;
+        z-index: 5;
 
         li {
             width: 1em;
