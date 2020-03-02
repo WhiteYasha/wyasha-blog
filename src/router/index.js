@@ -6,6 +6,7 @@ import NotFound from './../pages/404';
 import About from './../pages/About';
 import ArticleList from './../pages/ArticleList';
 import Article from './../pages/Article';
+import Login from './../pages/Login';
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [{
 		path: "/article/:id",
 		name: "Article",
 		component: Article
+	},
+	{
+		path: "/login",
+		name: "Login",
+		component: Login
 	}
 ];
 

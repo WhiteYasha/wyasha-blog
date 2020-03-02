@@ -1,7 +1,7 @@
 <template>
 <div class="header-container">
     <el-badge is-dot :hidden="true">
-        <el-avatar :size="40"></el-avatar>
+        <el-avatar :size="40" @click.native="onClick_showUser"></el-avatar>
     </el-badge>
     <div class="header-right">
         <el-dropdown>
@@ -50,10 +50,19 @@ export default {
                 this.isShowMenu = true;
             }
         },
-        onClick_changeItem: function(routeName) {
+        onClick_changeItem: function (routeName) {
             this.$router.push({
                 name: routeName
             });
+        },
+        onClick_showUser: function () {
+            if (!this.$store.state.isLoggedIn) {
+                this.$router.push({
+                    name: "Login"
+                });
+            } else {
+
+            }
         }
     }
 }
@@ -75,6 +84,7 @@ $lightColor: #eaeaea;
 
     .el-avatar {
         flex-basis: 40px;
+        cursor: pointer;
     }
 
     .header-right {
