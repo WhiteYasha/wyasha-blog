@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const host = "http://localhost:9000"
 
-exports.call = (api, methods, params) => {
+export function call(api, methods, params) {
     if (methods.toUpperCase() == "GET") return axios.get(host + api, {
         params
     });
