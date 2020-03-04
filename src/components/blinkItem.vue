@@ -32,7 +32,7 @@ export default {
         image: {
             type: Array,
             default: function() {
-                return ["/image/cover.jpg", "/image/cover2.jpg", "/image/cover3.jpg"];
+                return [];
             }
         }
     },
