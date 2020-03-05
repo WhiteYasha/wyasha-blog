@@ -1,18 +1,20 @@
 <template>
 <div class="list-item">
-    <h1>ES6 generator</h1>
-    <h4>JavaScript异步编程</h4>
-    <p>从前现在过去了再不来,红红落叶长埋尘土内,开始终结总是没变改,天边的你飘泊白云外,苦海翻起爱恨,在世间难逃避命运...</p>
+    <h1>{{ article.title }}</h1>
+    <h4 v-show="article.subTitle">{{ article.subTitle }}</h4>
+    <p v-show="article.summary">{{ article.summary }}</p>
     <div class="list-item-footer">
-        <router-link :to="{}">查看全文</router-link>
-        <i>2020-02-30 03:21</i>
+        <router-link :to="{ name: 'Article', params: { id: article._id } }">查看全文</router-link>
+        <i>{{ $moment(article.replyTime).format("YYYY/MM/DD hh:mm:ss") }}</i>
     </div>
 </div>
 </template>
 
 <script>
 export default {
-
+    props: {
+        article: Object
+    }
 }
 </script>
 

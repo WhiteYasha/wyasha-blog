@@ -28,4 +28,8 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.flex-gap {
+    flex: 1;
+}
 </style>

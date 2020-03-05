@@ -6,12 +6,11 @@
     <el-container class="list-container">
         <el-container class="list-left-container">
             <el-main class="list-left-main" v-loading="loading">
-                <!-- <article-list-item></article-list-item> -->
-                <article-list-item v-for="i in 5" :key="i"></article-list-item>
+                <article-list-item v-for="article in articles" :key="article.aid" :article="article"></article-list-item>
             </el-main>
             <el-footer :height="'auto'" class="list-left-footer">
-                <el-pagination id="pagination" :page-size="pageSize" :total="50" background layout="prev, pager, next, jumper"></el-pagination>
-                <el-pagination id="pagination-small" :page-size="pageSize" :total="50" background small layout="prev, pager, next"></el-pagination>
+                <el-pagination id="pagination" :page-size="pageSize" :total="total" background layout="prev, pager, next, jumper"></el-pagination>
+                <el-pagination id="pagination-small" :page-size="pageSize" :total="total" background small layout="prev, pager, next"></el-pagination>
             </el-footer>
         </el-container>
         <el-container class="list-right-container">
@@ -57,10 +56,38 @@ export default {
     },
     data() {
         return {
-            loading: false,
-            page: 1,
+            loading: true,
+            articles: [],
+            total: 0,
             pageSize: 10
         }
+    },
+    computed: {
+        page: function () {
+            return isNaN(Number(this.$route.query.page)) ? 1 : Number(this.$route.query.page);
+        }
+    },
+    methods: {
+        initArticles: async function () {
+            let params = {
+                page: this.page,
+                pageSize: this.pageSize
+            };
+            let articlesResponse = await this.$g.call("/article", "GET", params);
+            if (articlesResponse.data.error) {
+                this.$message({
+                    type: 'danger',
+                    message: `${ articlesResponse.data.errorMsg }`
+                });
+            } else {
+                this.total = articlesResponse.data.result.total;
+                this.articles = articlesResponse.data.result.articles;
+                this.loading = false;
+            }
+        }
+    },
+    created() {
+        this.initArticles();
     }
 }
 </script>

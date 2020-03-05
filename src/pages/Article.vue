@@ -3,36 +3,27 @@
     <el-header :height="'auto'">
         <main-menu :showMenu="false"></main-menu>
     </el-header>
-    <el-main class="article-main">
+    <el-main class="article-main" v-if="article">
         <el-page-header @back="onClick_back"></el-page-header>
         <div v-loading="articleLoading">
-            <h1 class="article-title">ES6 Generator</h1>
+            <h1 class="article-title">{{ article.title }}</h1>
             <el-row class="article-info" type="flex" align="middle" justify="space-between">
                 <el-col class="article-info-subTitle" :span="16" :xs="24">
-                    <h4>JavaScript异步编程</h4>
+                    <h4 v-if="article.subTitle">{{ article.subTitle }}</h4>
                 </el-col>
                 <el-col class="article-info-detail" :span="8" :xs="24">
-                    <span>2020-03-01 19:21</span>
+                    <span>{{ $moment(article.time).format("YYYY/MM/DD hh:mm:ss") }}</span>
                 </el-col>
             </el-row>
-            <div class="article-content">123412312</div>
+            <div class="article-content" v-html="article.content"></div>
         </div>
-        <el-divider content-position="left">共21条评论</el-divider>
+        <el-divider content-position="left">共{{ total }}条评论</el-divider>
         <div v-loading="commentLoading">
-            <el-card class="article-comment-card" shadow="never" :body-style="{ padding: '10px 20px' }">
-                <article-comment>
-                    <article-comment>
-                        <article-comment>
-                            <article-comment></article-comment>
-                        </article-comment>
-                    </article-comment>
-                </article-comment>
-            </el-card>
-            <el-card class="article-comment-card" shadow="never" :body-style="{ padding: '10px 20px' }">
-                <article-comment></article-comment>
-            </el-card>
+            <article-comment v-for="reply in replies" :key="reply._id" :reply="reply"></article-comment>
+            <!-- <article-comment></article-comment>
+            <article-comment></article-comment> -->
         </div>
-        <el-pagination layout="prev, pager, next" :total="12" background small></el-pagination>
+        <el-pagination layout="prev, pager, next" :page-size="pageSize" :total="total" background small></el-pagination>
     </el-main>
     <el-footer :height="'auto'">
         <main-footer></main-footer>
@@ -53,8 +44,13 @@ export default {
     },
     data() {
         return {
+            article: null,
+            replies: [],
             articleLoading: true,
-            commentLoading: true
+            commentLoading: true,
+            page: 1,
+            pageSize: 5,
+            total: 0
         };
     },
     methods: {
@@ -62,7 +58,45 @@ export default {
             this.$router.push({
                 name: "ArticleList"
             });
+        },
+        initArticle: async function () {
+            let params = {
+                aid: this.$route.params.id
+            };
+            let articleResponse = await this.$g.call("/article/get", "GET", params);
+            if (articleResponse.data.error) {
+                this.$message({
+                    type: 'danger',
+                    message: `${ articlesResponse.data.errorMsg }`
+                });
+            } else {
+                this.article = articleResponse.data.result;
+                this.articleLoading = false;
+            }
+        },
+        initReplies: async function() {
+            let params = {
+                aid: this.$route.params.id,
+                page: this.page,
+                pageSize: this.pageSize
+            };
+            let repliesResponse = await this.$g.call("/reply/article", 'GET', params);
+            if (repliesResponse.data.error) {
+                this.$message({
+                    type: 'danger',
+                    message: `${ articlesResponse.data.errorMsg }`
+                });
+            }
+            else {
+                this.replies = repliesResponse.data.result.replies;
+                this.total = repliesResponse.data.result.total;
+                this.commentLoading = false;
+            }
         }
+    },
+    created() {
+        this.initArticle();
+        this.initReplies();
     }
 }
 </script>
@@ -75,7 +109,6 @@ $mutedColor: #a7abb3;
 
 .home-container {
     width: 100%;
-    height: auto;
     margin-top: 30px;
 
     .article-main {
@@ -108,8 +141,7 @@ $mutedColor: #a7abb3;
             text-align: left;
         }
 
-        .el-pagination,
-        .article-comment-card+.article-comment-card {
+        .el-pagination {
             margin-top: 20px;
         }
     }

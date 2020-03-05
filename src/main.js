@@ -11,6 +11,8 @@ import moment from 'moment';
 import * as g from './js/global';
 
 Vue.use(ElementUI);
+moment.locale("zh_cn");
+
 Vue.prototype.$moment = moment;
 Vue.prototype.$g = g;
 Vue.config.productionTip = false
