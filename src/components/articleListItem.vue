@@ -4,7 +4,7 @@
     <h4 v-show="article.subTitle">{{ article.subTitle }}</h4>
     <p v-show="article.summary">{{ article.summary }}</p>
     <div class="list-item-footer">
-        <router-link :to="{ name: 'Article', params: { id: article._id } }">查看全文</router-link>
+        <router-link :to="{ name: 'Article', params: { id: article._id } }">{{ $t("message.showAll") }}</router-link>
         <i>{{ $moment(article.replyTime).format("YYYY/MM/DD hh:mm:ss") }}</i>
     </div>
 </div>

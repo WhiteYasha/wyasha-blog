@@ -9,13 +9,17 @@
         </div>
         <div class="blink-item-info">
             <i>2020-03-02 12:31:23</i>
-            <el-button type="text" size="mini" @click="onClick_toggleReply">回复(3)</el-button>
+            <el-button type="text" size="mini" @click="onClick_toggleReply">{{ $t("message.comment") }}(3)</el-button>
         </div>
     </div>
     <transition name="el-zoom-in-top">
         <div class="blink-item-reply" v-show="showReply">
-            <article-comment></article-comment>
+            <!-- <article-comment></article-comment> -->
             <el-pagination :total="3" layout="prev, pager, next" small></el-pagination>
+            <div class="blink-item-form">
+                <el-input type="textarea" :rows="2"></el-input>
+                <el-button type="primary" size="mini">{{ $t("message.send") }}</el-button>
+            </div>
         </div>
     </transition>
 </div>
@@ -31,7 +35,7 @@ export default {
     props: {
         image: {
             type: Array,
-            default: function() {
+            default: function () {
                 return [];
             }
         }
@@ -102,6 +106,20 @@ $grayColor: #f7f7f7;
 
     .blink-item-reply {
         background: $grayColor;
+
+        >*:not(:first-child) {
+            margin-top: 10px;
+        }
+
+        .blink-item-form {
+            display: flex;
+            flex-direction: column;
+
+            .el-button {
+                margin-top: 10px;
+                align-self: flex-end;
+            }
+        }
     }
 }
 
@@ -112,6 +130,7 @@ $grayColor: #f7f7f7;
         .el-image {
             flex: 0 0 150px;
         }
+
         .el-image+.el-image {
             margin-left: 50px;
         }

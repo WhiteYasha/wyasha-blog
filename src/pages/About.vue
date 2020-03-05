@@ -12,26 +12,26 @@
         <el-container class="about-content-container">
             <el-main class="about-content-main">
                 <h1>WYASHA</h1>
-                <p>家乡浙江金华，杭州师范大学软件工程系大三在读学生，主攻前端方向。宅，平时比较喜欢听摇滚乐、玩拼装模型，偶尔也会运动一下打打篮球。最喜欢的作品是机动战士高达系列，最喜欢的乐队是Ramones。</p>
+                <p>{{ $t("message.introduction") }}</p>
                 <el-divider></el-divider>
-                <h4>技能栈</h4>
+                <h4>{{ $t("message.skillStack") }}</h4>
                 <ul>
-                    <li>熟悉HTML5/CSS3及盒模型</li>
-                    <li>掌握响应式布局</li>
-                    <li>了解浏览器适配与页面加载流程</li>
-                    <li>掌握JavaScript与ES6语法</li>
-                    <li>掌握React/Vue框架的使用</li>
-                    <li>了解Webpack、Git等工具的使用</li>
-                    <li>了解Node.js和Express框架的使用</li>
+                    <li>{{ $t("skill.knowledge") }}</li>
+                    <li>{{ $t("skill.responsive") }}</li>
+                    <li>{{ $t("skill.browser") }}</li>
+                    <li>{{ $t("skill.javascript") }}</li>
+                    <li>{{ $t("skill.frame") }}</li>
+                    <li>{{ $t("skill.tools") }}</li>
+                    <li>{{ $t("skill.backend") }}</li>
                 </ul>
                 <el-divider></el-divider>
-                <h4>联系我</h4>
+                <h4>{{ $t("message.contact") }}</h4>
                 <el-form v-model="form">
                     <el-form-item>
-                        <el-input type="textarea" v-model="form.content" :rows="3" placeholder="有什么想对我说的" autofocus />
+                        <el-input type="textarea" v-model="form.content" :rows="3" :placeholder="$t('message.saySomething')" autofocus />
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="success">发送</el-button>
+                        <el-button type="success">{{ $t("message.send") }}</el-button>
                     </el-form-item>
                 </el-form>
             </el-main>

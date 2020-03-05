@@ -6,9 +6,9 @@
         </el-header>
         <el-main class="home-main-container">
             <div class="home-left-content">
-                <h1>WYASHA的个人博客</h1>
+                <h1>{{ $t("message.blog", {0: "WYASHA"}) }}</h1>
                 <p>Now is better than never.</p>
-                <el-button type="primary">Start</el-button>
+                <el-button type="primary" @click="onClick_start">{{ $t("message.start") }}</el-button>
             </div>
         </el-main>
         <el-footer :height="'auto'">
@@ -50,6 +50,11 @@ export default {
         },
         onClick_prevCover: function () {
             this.coverIndex = this.coverIndex - 1 < 0 ? 2 : this.coverIndex - 1;
+        },
+        onClick_start: function () {
+            this.$router.push({
+                name: "ArticleList"
+            });
         }
     }
 }

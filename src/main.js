@@ -11,7 +11,7 @@ import moment from 'moment';
 import * as g from './js/global';
 
 Vue.use(ElementUI);
-moment.locale("zh_cn");
+moment.locale(i18n.locale);
 
 Vue.prototype.$moment = moment;
 Vue.prototype.$g = g;

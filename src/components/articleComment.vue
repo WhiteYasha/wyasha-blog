@@ -1,21 +1,21 @@
 <template>
-<el-card class="comment-container" shadow="never" :body-style="{ padding: '10px 1em', display: 'flex' }">
+<div class="comment-container">
     <div class="comment-left">
         <el-avatar :size="32"></el-avatar>
     </div>
     <div class="comment-right">
         <div class="comment-right-header">
             <p>{{ reply.user.name }}</p>
-            <p v-if="reply.replyUser">回复&nbsp;{{ reply.replyUser.name }}</p>
+            <p v-if="reply.replyUser">{{ $t("message.reply", {0: reply.replyUser.name}) }}</p>
             <div class="flex-gap"></div>
             <i>{{ $moment(reply.replyTime).fromNow() }}</i>
         </div>
         <div class="comment-right-main" v-if="reply.content" v-html="replyConetnt"></div>
         <div class="comment-right-footer">
-            <el-button type="text" size="mini">评论</el-button>
+            <el-button type="text" size="mini">{{ $t("message.comment") }}</el-button>
         </div>
     </div>
-</el-card>
+</div>
 </template>
 
 <script>
@@ -39,12 +39,9 @@ $contentColor: #52555a;
 $grayColor: #aaa;
 $mutedColor: #a7abb3;
 
-.comment-container+.comment-container {
-    margin-top: 20px;
-}
-
 .comment-container {
     width: 100%;
+    display: flex;
     text-align: left;
 
     .comment-left {

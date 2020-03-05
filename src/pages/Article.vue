@@ -4,7 +4,7 @@
         <main-menu :showMenu="false"></main-menu>
     </el-header>
     <el-main class="article-main" v-if="article">
-        <el-page-header @back="onClick_back"></el-page-header>
+        <el-page-header :title="$t('message.back')" @back="onClick_back"></el-page-header>
         <div v-loading="articleLoading">
             <h1 class="article-title">{{ article.title }}</h1>
             <el-row class="article-info" type="flex" align="middle" justify="space-between">
@@ -17,11 +17,11 @@
             </el-row>
             <div class="article-content" v-html="article.content"></div>
         </div>
-        <el-divider content-position="left">共{{ total }}条评论</el-divider>
+        <el-divider content-position="left">{{ $t("message.totalComment", {0: total}) }}</el-divider>
         <div v-loading="commentLoading">
-            <article-comment v-for="reply in replies" :key="reply._id" :reply="reply"></article-comment>
-            <!-- <article-comment></article-comment>
-            <article-comment></article-comment> -->
+            <el-card shadow="never" v-for="reply in replies" :key="reply._id">
+                <article-comment :reply="reply"></article-comment>
+            </el-card>
         </div>
         <el-pagination layout="prev, pager, next" :page-size="pageSize" :total="total" background small></el-pagination>
     </el-main>
@@ -74,7 +74,7 @@ export default {
                 this.articleLoading = false;
             }
         },
-        initReplies: async function() {
+        initReplies: async function () {
             let params = {
                 aid: this.$route.params.id,
                 page: this.page,
@@ -86,8 +86,7 @@ export default {
                     type: 'danger',
                     message: `${ articlesResponse.data.errorMsg }`
                 });
-            }
-            else {
+            } else {
                 this.replies = repliesResponse.data.result.replies;
                 this.total = repliesResponse.data.result.total;
                 this.commentLoading = false;
@@ -145,6 +144,10 @@ $mutedColor: #a7abb3;
             margin-top: 20px;
         }
     }
+}
+
+.el-card+.el-card {
+    margin-top: 20px;
 }
 
 @media screen and (min-width: 1000px) {

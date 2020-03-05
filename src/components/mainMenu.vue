@@ -4,7 +4,7 @@
         <el-avatar :size="40" @click.native="onClick_showUser"></el-avatar>
     </el-badge>
     <div class="header-right">
-        <el-dropdown>
+        <el-dropdown @command="onClick_changeLocale">
             <span class="header-dropdown-link">
                 {{ $i18n.locale == 'zh_cn' ? "中文" : ($i18n.locale == 'ja' ? '日本語' : 'English') }}
                 <i class="el-icon el-icon-arrow-down el-icon--right"></i>
@@ -19,10 +19,10 @@
     </div>
     <transition name="el-zoom-in-top">
         <ul class="header-menu" v-if="showMenu" v-show="isShowMenu">
-            <li :class="$route.name == 'Home' ? 'active' : ''" @click="onClick_changeItem('Home')">首页</li>
-            <li :class="$route.name == 'ArticleList' ? 'active' : ''" @click="onClick_changeItem('ArticleList')">文章</li>
-            <li :class="$route.name == 'Blink' ? 'active' : ''" @click="onClick_changeItem('Blink')">动态</li>
-            <li :class="$route.name == 'About' ? 'active' : ''" @click="onClick_changeItem('About')">关于</li>
+            <li :class="$route.name == 'Home' ? 'active' : ''" @click="onClick_changeItem('Home')">{{ $t("message.home") }}</li>
+            <li :class="$route.name == 'ArticleList' ? 'active' : ''" @click="onClick_changeItem('ArticleList')">{{ $t("message.article") }}</li>
+            <li :class="$route.name == 'Blink' ? 'active' : ''" @click="onClick_changeItem('Blink')">{{ $t("message.blink") }}</li>
+            <li :class="$route.name == 'About' ? 'active' : ''" @click="onClick_changeItem('About')">{{ $t("message.about") }}</li>
         </ul>
     </transition>
 </div>
@@ -63,6 +63,11 @@ export default {
             } else {
 
             }
+        },
+        onClick_changeLocale: function (command) {
+            localStorage.setItem("lang", command);
+            this.$i18n.locale = command;
+            this.$moment.locale(command);
         }
     }
 }
@@ -113,7 +118,6 @@ $lightColor: #eaeaea;
         z-index: 5;
 
         li {
-            width: 1em;
             padding: 1em 1.5em;
             cursor: pointer;
             transition: background-color .3s;
