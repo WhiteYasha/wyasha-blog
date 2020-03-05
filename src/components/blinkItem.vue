@@ -1,23 +1,23 @@
 <template>
 <div class="blink-item-container">
-    <div class="blink-item-main">
+    <div class="blink-item-main" v-if="blink">
         <p class="blink-item-content">
-            还有1个月我们就要和2019告别了，回顾2019，有没有什么事情对你来说是难忘的，有意义的，甚至是你2019生活的转折呢？
+            {{ blink.content }}
         </p>
-        <div class="blink-item-images" v-show="image.length > 0">
-            <el-image v-for="(img, i) in image" :key="i" :src="img" :preview-src-list="image"></el-image>
+        <div class="blink-item-images" v-show="blink.image.length > 0">
+            <el-image v-for="(img, i) in blink.image" :key="i" :src="img" :preview-src-list="blink.image"></el-image>
         </div>
-        <div class="blink-item-info">
-            <i>2020-03-02 12:31:23</i>
-            <el-button type="text" size="mini" @click="onClick_toggleReply">{{ $t("message.comment") }}(3)</el-button>
+        <div class="blink-item-info" v-if="blink.replies">
+            <i>{{ $moment(blink.time).format("YYYY/MM/DD HH:mm:ss") }}</i>
+            <el-button type="text" size="mini" @click="onClick_toggleReply">{{ $t("message.comment") }}({{ blink.replies.length }})</el-button>
         </div>
     </div>
     <transition name="el-zoom-in-top">
-        <div class="blink-item-reply" v-show="showReply">
-            <!-- <article-comment></article-comment> -->
+        <div class="blink-item-reply" v-show="showReply" v-if="blink.replies">
+            <article-comment v-for="reply in blink.replies" :key="reply._id" :reply="reply" :comment="onClick_comment"></article-comment>
             <el-pagination :total="3" layout="prev, pager, next" small></el-pagination>
             <div class="blink-item-form">
-                <el-input type="textarea" :rows="2"></el-input>
+                <el-input type="textarea" v-model="text" :rows="2" :placeholder="placeholder"></el-input>
                 <el-button type="primary" size="mini">{{ $t("message.send") }}</el-button>
             </div>
         </div>
@@ -33,21 +33,33 @@ export default {
         articleComment
     },
     props: {
-        image: {
-            type: Array,
-            default: function () {
-                return [];
-            }
-        }
+        blink: Object
     },
     data() {
         return {
-            showReply: false
+            showReply: false,
+            text: "",
+            replyUser: null
+        }
+    },
+    computed: {
+        placeholder: function () {
+            if (this.replyUser) return this.$t("message.reply", {
+                0: this.replyUser.name
+            });
+            else return "";
         }
     },
     methods: {
         onClick_toggleReply: function () {
             this.showReply = !this.showReply;
+        },
+        onClick_comment: function (user) {
+            if (this.replyUser && this.replyUser._id == user._id) {
+                this.replyUser = null;
+            } else {
+                this.replyUser = user;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@
                     <h4 v-if="article.subTitle">{{ article.subTitle }}</h4>
                 </el-col>
                 <el-col class="article-info-detail" :span="8" :xs="24">
-                    <span>{{ $moment(article.time).format("YYYY/MM/DD hh:mm:ss") }}</span>
+                    <span>{{ $moment(article.time).format("YYYY/MM/DD HH:mm:ss") }}</span>
                 </el-col>
             </el-row>
             <div class="article-content" v-html="article.content"></div>
@@ -23,7 +23,7 @@
                 <article-comment :reply="reply"></article-comment>
             </el-card>
         </div>
-        <el-pagination layout="prev, pager, next" :page-size="pageSize" :total="total" background small></el-pagination>
+        <el-pagination layout="prev, pager, next" :current-page="page" :page-size="pageSize" :total="total" background small></el-pagination>
     </el-main>
     <el-footer :height="'auto'">
         <main-footer></main-footer>
@@ -48,10 +48,14 @@ export default {
             replies: [],
             articleLoading: true,
             commentLoading: true,
-            page: 1,
             pageSize: 5,
             total: 0
         };
+    },
+    computed: {
+        page: function() {
+            return isNaN(Number(this.$route.query.page)) ? 1 : Number(this.$route.query.page);
+        }
     },
     methods: {
         onClick_back: function () {

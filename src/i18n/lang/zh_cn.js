@@ -18,7 +18,12 @@ const zh_cn = {
         "skillStack": "技能栈",
         "contact": "联系我",
         "saySomething": "有什么想对我说的",
-        "send": "发送"
+        "send": "发送",
+        "login": "登录",
+        "email": "邮箱",
+        "password": "密码",
+        "remember": "记住我",
+        "forget": "忘记密码"
     },
     skill: {
         "knowledge": "熟悉HTML5/CSS3及盒模型",

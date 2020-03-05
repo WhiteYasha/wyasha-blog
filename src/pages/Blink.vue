@@ -5,13 +5,13 @@
     </el-header>
     <el-container>
         <el-main class="blink-main">
-            <blink-item></blink-item>
-            <blink-item></blink-item>
-            <blink-item></blink-item>
+            <div v-loading="blinkLoading">
+                <blink-item v-for="blink in blinks" :key="blink._id" :blink="blink"></blink-item>
+            </div>
         </el-main>
         <el-footer class="blink-pagination" :height="'auto'">
-            <el-pagination id="pagination" layout="prev, pager, next, jumper" background :total="100"></el-pagination>
-            <el-pagination id="pagination-small" layout="prev, pager, next" background small :total="100"></el-pagination>
+            <el-pagination id="pagination" layout="prev, pager, next, jumper" background :total="total" :page-size="pageSize"></el-pagination>
+            <el-pagination id="pagination-small" layout="prev, pager, next" background small :total="total" :page-size="pageSize"></el-pagination>
         </el-footer>
     </el-container>
     <el-footer :height="'auto'">
@@ -31,6 +31,51 @@ export default {
         mainFooter,
         mainMenu,
         blinkItem
+    },
+    data() {
+        return {
+            blinkLoading: true,
+            pageSize: 10,
+            total: 0,
+            blinks: []
+        }
+    },
+    computed: {
+        page: function () {
+            return isNaN(Number(this.$route.query.page)) ? 1 : Number(this.$route.query.page);
+        }
+    },
+    methods: {
+        initBlinks: async function () {
+            let params = {
+                page: this.page,
+                pageSize: this.pageSize
+            };
+            let blinksResponse = await this.$g.call("/blink", "GET", params);
+            if (blinksResponse.data.error) {
+                this.$message({
+                    type: 'danger',
+                    message: `${ articlesResponse.data.errorMsg }`
+                });
+            } else {
+                this.total = blinksResponse.data.result.total;
+                let blinks = [];
+                for (var i = 0; i < blinksResponse.data.result.blinks.length; i++) {
+                    let params = {
+                        bid: blinksResponse.data.result.blinks[i]._id
+                    };
+                    let repliesResponse = await this.$g.call("/reply/blink", "GET", params);
+                    blinks.push(Object.assign(blinksResponse.data.result.blinks[i], {
+                        replies: repliesResponse.data.result
+                    }));
+                }
+                this.blinks = blinks;
+                this.blinkLoading = false;
+            }
+        }
+    },
+    created() {
+        this.initBlinks();
     }
 }
 </script>

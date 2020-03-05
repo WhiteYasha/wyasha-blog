@@ -18,7 +18,12 @@ const en = {
         "skillStack": "Skill Stack",
         "contact": "Contact Me",
         "saySomething": "What do you wanna say to me",
-        "send": "Send"
+        "send": "Send",
+        "login": "Login",
+        "email": "Email",
+        "password": "Password",
+        "remember": "Remember me",
+        "forget": "Forget password"
     },
     skill: {
         "knowledge": "Familiar with HTML5 / CSS3 and box model",

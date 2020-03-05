@@ -1,7 +1,7 @@
 <template>
 <div class="comment-container">
     <div class="comment-left">
-        <el-avatar :size="32"></el-avatar>
+        <el-avatar :size="32" :src="reply.user.avatar"></el-avatar>
     </div>
     <div class="comment-right">
         <div class="comment-right-header">
@@ -10,9 +10,9 @@
             <div class="flex-gap"></div>
             <i>{{ $moment(reply.replyTime).fromNow() }}</i>
         </div>
-        <div class="comment-right-main" v-if="reply.content" v-html="replyConetnt"></div>
+        <div class="comment-right-main" v-if="reply.content" v-html="replyContent"></div>
         <div class="comment-right-footer">
-            <el-button type="text" size="mini">{{ $t("message.comment") }}</el-button>
+            <el-button type="text" size="mini" @click="onClick_comment">{{ $t("message.comment") }}</el-button>
         </div>
     </div>
 </div>
@@ -23,10 +23,19 @@ export default {
     name: "articleComment",
     props: {
         reply: Object,
+        comment: {
+            type: Function,
+            default: () => {}
+        }
     },
     computed: {
-        replyConetnt: function () {
-            return this.reply.content.replace(/\n/g, "<br>");
+        replyContent: function () {
+            return this.reply.content.replace(/\\n/g, '<br>');
+        }
+    },
+    methods: {
+        onClick_comment: function() {
+            this.comment(this.reply.user);
         }
     }
 }

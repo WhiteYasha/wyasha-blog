@@ -7,28 +7,31 @@
             </el-main>
         </el-container>
         <el-container class="login-right-container">
+            <el-header :height="'auto'" :style="{ padding: '10px' }">
+                <main-menu :showMenu="false" :showAvatar="false"></main-menu>
+            </el-header>
             <el-main class="login-right-main">
                 <div class="login-content">
                     <div class="login-content-info">
                         <el-button type="text" size="mini" circle icon="el-icon el-icon-arrow-left" @click="onClick_back"></el-button>
                     </div>
-                    <h1>LOGIN</h1>
+                    <h1>{{ $t("message.login") }}</h1>
                     <el-form v-model="form">
                         <el-form-item>
-                            <el-input v-model="form.email" placeholder="邮箱"></el-input>
+                            <el-input v-model="form.email" :placeholder="$t('message.email')"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-input v-model="form.password" type="password" placeholder="密码"></el-input>
+                            <el-input v-model="form.password" type="password" :placeholder="$t('message.password')"></el-input>
                         </el-form-item>
                         <el-form-item :style="{ textAlign: 'left' }">
-                            <el-checkbox v-model="form.remember">记住我</el-checkbox>
+                            <el-checkbox v-model="form.remember">{{ $t("message.remember") }}</el-checkbox>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary">登录</el-button>
+                            <el-button type="primary">{{ $t("message.login") }}</el-button>
                         </el-form-item>
                     </el-form>
                     <div class="login-content-info">
-                        <router-link :to="{}">忘记密码</router-link>
+                        <router-link :to="{}">{{ $t("message.forget") }}</router-link>
                         <router-link :to="{}">注册</router-link>
                     </div>
                 </div>
@@ -43,11 +46,13 @@
 
 <script>
 import mainFooter from './../components/mainFooter';
+import mainMenu from './../components/mainMenu';
 
 export default {
     name: "Login",
     components: {
-        mainFooter
+        mainFooter,
+        mainMenu
     },
     data() {
         return {
@@ -138,7 +143,7 @@ $whiteColor: #fff;
     }
 
     .login-right-container {
-        z-index: 3333;
+        z-index: 1;
 
         .login-content {
             width: 80%;

@@ -1,7 +1,7 @@
 <template>
 <div class="header-container">
     <el-badge is-dot :hidden="true">
-        <el-avatar :size="40" @click.native="onClick_showUser"></el-avatar>
+        <el-avatar v-if="showAvatar" :size="40" :src="defaultAvatar" @click.native="onClick_showUser"></el-avatar>
     </el-badge>
     <div class="header-right">
         <el-dropdown @command="onClick_changeLocale">
@@ -35,10 +35,15 @@ export default {
         showMenu: {
             type: Boolean,
             default: true
+        },
+        showAvatar: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
         return {
+            defaultAvatar: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
             isShowMenu: window.innerWidth < 1000 ? false : true
         }
     },

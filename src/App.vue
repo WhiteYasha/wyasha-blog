@@ -4,6 +4,20 @@
 </div>
 </template>
 
+<script>
+export default {
+    methods: {
+        onCreate_autoLogin: function() {
+            let email = sessionStorage.email,
+                password = sessionStorage.password;
+        }
+    },
+    created() {
+        this.onCreate_autoLogin();
+    }
+}
+</script>
+
 <style lang="scss">
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
