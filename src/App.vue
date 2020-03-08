@@ -47,4 +47,19 @@ a:hover {
 .flex-gap {
     flex: 1;
 }
+
+#nodata {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 1200px) {
+    #app {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
 </style>

@@ -26,7 +26,9 @@ const ja = {
         "password": "パスワード",
         "remember": "私を覚えてますか",
         "forget": "パスワードをお忘れですか",
-        "noComment": "まだコメントがありません"
+        "noComment": "まだコメントがありません",
+        "noArticle": "記事がありません",
+        "noBlink": "インスタントがありません"
     },
     skill: {
         "knowledge": "HTML5 / CSS3およびボックスモデルに精通している",

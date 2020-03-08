@@ -5,7 +5,7 @@
     <p v-show="article.summary">{{ article.summary }}</p>
     <div class="list-item-footer">
         <router-link :to="{ name: 'Article', params: { id: article._id } }">{{ $t("message.showAll") }}</router-link>
-        <i>{{ $moment(article.replyTime).format("YYYY/MM/DD HH:mm:ss") }}</i>
+        <i>{{ $moment(article.time).format("YYYY/MM/DD HH:mm:ss") }}</i>
     </div>
 </div>
 </template>

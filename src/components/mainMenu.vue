@@ -149,9 +149,12 @@ $lightColor: #eaeaea;
 @media screen and (max-width: 1000px) {
     .header-container {
         flex-wrap: wrap;
+        position: relative;
 
         .header-menu {
             width: 100%;
+            position: absolute;
+            top: 100%;
             flex-wrap: wrap;
 
             li {

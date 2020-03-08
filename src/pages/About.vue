@@ -89,11 +89,13 @@ export default {
 
             p {
                 text-indent: 2em;
+                font-size: 14px;
                 margin: 0;
                 line-height: 1.5;
             }
 
             ul {
+                font-size: 14px;
                 margin: 0;
                 line-height: 1.5;
             }

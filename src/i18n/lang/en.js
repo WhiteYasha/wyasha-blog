@@ -26,7 +26,9 @@ const en = {
         "password": "Password",
         "remember": "Remember me",
         "forget": "Forget password",
-        "noComment": "No comment yet"
+        "noComment": "No comment yet",
+        "noArticle": "No article yet",
+        "noBlink": "No blink yet"
     },
     skill: {
         "knowledge": "Familiar with HTML5 / CSS3 and box model",

@@ -8,6 +8,9 @@
             <div v-loading="blinkLoading">
                 <blink-item v-for="blink in blinks" :key="blink._id" :blink="blink"></blink-item>
             </div>
+            <div id="nodata" v-show="blinks.length == 0">
+                <h1>{{ $t("message.noBlink") }}</h1>
+            </div>
         </el-main>
         <el-footer class="blink-pagination" :height="'auto'">
             <el-pagination id="pagination" layout="prev, pager, next, jumper" background :total="total" :page-size="pageSize"></el-pagination>

@@ -26,7 +26,9 @@ const zh_cn = {
         "password": "密码",
         "remember": "记住我",
         "forget": "忘记密码",
-        "noComment": "还没有人评论"
+        "noComment": "还没有人评论",
+        "noArticle": "还没有文章",
+        "noBlink": "还没有动态"
     },
     skill: {
         "knowledge": "熟悉HTML5/CSS3及盒模型",

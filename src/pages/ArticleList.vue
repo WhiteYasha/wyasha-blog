@@ -7,6 +7,9 @@
         <el-container class="list-left-container">
             <el-main class="list-left-main" v-loading="loading">
                 <article-list-item v-for="article in articles" :key="article.aid" :article="article"></article-list-item>
+                <div id="nodata" v-show="articles.length == 0">
+                    <h4>{{ $t("message.noArticle") }}</h4>
+                </div>
             </el-main>
             <el-footer :height="'auto'" class="list-left-footer">
                 <el-pagination id="pagination" :page-size="pageSize" :total="total" background layout="prev, pager, next, jumper"></el-pagination>
@@ -15,24 +18,9 @@
         </el-container>
         <el-container class="list-right-container">
             <el-main class="list-right-main">
-                <el-input suffix-icon="el-icon el-icon-search"></el-input>
-                <el-card shadow="never" :body-style="{ padding: '10px' }">
-                    <h4>文章分类</h4>
-                    <ol>
-                        <li>
-                            <router-link :to="{}">前端</router-link>
-                        </li>
-                        <li>
-                            <router-link :to="{}">后端</router-link>
-                        </li>
-                        <li>
-                            <router-link :to="{}">随笔</router-link>
-                        </li>
-                        <li>
-                            <router-link :to="{}">算法</router-link>
-                        </li>
-                    </ol>
-                </el-card>
+                <el-input clearable v-model="keyword">
+                    <i slot="prefix" class="el-input__icon el-icon el-icon-search" @click="onClick_searchArticles"></i>
+                </el-input>
             </el-main>
         </el-container>
     </el-container>
@@ -54,12 +42,19 @@ export default {
         mainFooter,
         articleListItem
     },
+    watch: {
+        $route: function () {
+            this.keyword = this.$route.query.keyword || "";
+            this.initArticles();
+        }
+    },
     data() {
         return {
             loading: true,
             articles: [],
             total: 0,
-            pageSize: 10
+            pageSize: 10,
+            keyword: this.$route.query.keyword || ""
         }
     },
     computed: {
@@ -69,7 +64,9 @@ export default {
     },
     methods: {
         initArticles: async function () {
+            this.loading = true;
             let params = {
+                keyword: this.keyword,
                 page: this.page,
                 pageSize: this.pageSize
             };
@@ -84,7 +81,17 @@ export default {
                 this.articles = articlesResponse.data.result.articles;
                 this.loading = false;
             }
+        },
+        onClick_searchArticles: function () {
+            this.$router.push({
+                query: {
+                    keyword: this.keyword
+                }
+            });
         }
+        // handleKeyword: function(keyword) {
+        //     return keyword.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/on/g, "on_");
+        // }
     },
     created() {
         this.initArticles();
@@ -136,6 +143,10 @@ $titleColor: #18191b;
                 padding: 0;
                 padding-top: 50px;
 
+                i.el-icon {
+                    cursor: pointer;
+                }
+
                 >*:not(:first-child) {
                     margin-top: 20px;
                 }
@@ -145,16 +156,6 @@ $titleColor: #18191b;
                         margin: 0;
                         font-size: 18px;
                         font-weight: 500;
-                    }
-
-                    ol {
-                        margin: 10px 0;
-                        line-height: 1.5;
-                        font-size: 14px;
-
-                        a {
-                            color: $titleColor;
-                        }
                     }
                 }
             }
@@ -185,6 +186,11 @@ $titleColor: #18191b;
 
         .list-right-container {
             order: 1;
+            height: 100%;
+
+            .list-right-main {
+                padding-bottom: 0;
+            }
 
             .el-card {
                 display: none;
