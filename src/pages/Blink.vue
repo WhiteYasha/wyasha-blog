@@ -57,7 +57,7 @@ export default {
             let blinksResponse = await this.$g.call("/blink", "GET", params);
             if (blinksResponse.data.error) {
                 this.$message({
-                    type: 'danger',
+                    type: 'error',
                     message: `${ articlesResponse.data.errorMsg }`
                 });
             } else {

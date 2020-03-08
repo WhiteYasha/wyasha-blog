@@ -56,9 +56,9 @@ a:hover {
     align-items: center;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1440px) {
     #app {
-        width: 1200px;
+        width: 1440px;
         margin: 0 auto;
     }
 }

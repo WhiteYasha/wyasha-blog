@@ -12,8 +12,8 @@
                 </div>
             </el-main>
             <el-footer :height="'auto'" class="list-left-footer">
-                <el-pagination id="pagination" :page-size="pageSize" :total="total" background layout="prev, pager, next, jumper"></el-pagination>
-                <el-pagination id="pagination-small" :page-size="pageSize" :total="total" background small layout="prev, pager, next"></el-pagination>
+                <el-pagination id="pagination" :page-size="pageSize" :total="total" background layout="prev, pager, next, jumper" @current-change="onChange_page"></el-pagination>
+                <el-pagination id="pagination-small" :page-size="pageSize" :total="total" background small layout="prev, pager, next" @current-change="onChange_page"></el-pagination>
             </el-footer>
         </el-container>
         <el-container class="list-right-container">
@@ -73,7 +73,7 @@ export default {
             let articlesResponse = await this.$g.call("/article", "GET", params);
             if (articlesResponse.data.error) {
                 this.$message({
-                    type: 'danger',
+                    type: 'error',
                     message: `${ articlesResponse.data.errorMsg }`
                 });
             } else {
@@ -86,6 +86,13 @@ export default {
             this.$router.push({
                 query: {
                     keyword: this.keyword
+                }
+            });
+        },
+        onChange_page: function(currentPage) {
+            this.$router.push({
+                query: {
+                    page: currentPage
                 }
             });
         }
@@ -169,7 +176,7 @@ $titleColor: #18191b;
     }
 
     .list-container {
-        flex-wrap: wrap;
+        flex-direction: column;
 
         .list-left-container,
         .list-right-container {
@@ -186,7 +193,7 @@ $titleColor: #18191b;
 
         .list-right-container {
             order: 1;
-            height: 100%;
+            flex: 0 0 100%;
 
             .list-right-main {
                 padding-bottom: 0;

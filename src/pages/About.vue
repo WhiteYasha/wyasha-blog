@@ -6,7 +6,7 @@
     <el-container class="about-father-container">
         <el-container class="about-cover-container">
             <el-main class="about-cover-main">
-                <el-image class="about-cover" src="/image/cover.jpg" fit="cover"></el-image>
+                <el-image class="about-cover" src="/image/cover1-sm.jpg" fit="cover" srcset="/image/cover1.jpg 800w"></el-image>
             </el-main>
         </el-container>
         <el-container class="about-content-container">

@@ -3,7 +3,7 @@
     <el-container class="login-container">
         <el-container class="login-left-container">
             <el-main class="login-left-main">
-                <el-image class="login-cover" src="/image/cover.jpg" fit="cover"></el-image>
+                <el-image class="login-cover" src="/image/cover1-sm.jpg" fit="cover" srcset="/image/cover1.jpg 800w"></el-image>
             </el-main>
         </el-container>
         <el-container class="login-right-container">

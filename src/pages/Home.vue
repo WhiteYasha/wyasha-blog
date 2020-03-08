@@ -18,9 +18,9 @@
     <el-container class="home-right">
         <el-main class="home-main-container">
             <div class="right-cover-container">
-                <el-image fit="cover" class="home-right-cover" :class="coverIndex == 0 ? 'active' : ''" src="/image/cover.jpg"></el-image>
-                <el-image fit="cover" class="home-right-cover" :class="coverIndex == 1 ? 'active' : ''" src="/image/cover2.jpg"></el-image>
-                <el-image fit="cover" class="home-right-cover" :class="coverIndex == 2 ? 'active' : ''" src="/image/cover3.jpg"></el-image>
+                <el-image fit="cover" class="home-right-cover" :class="coverIndex == 0 ? 'active' : ''" src="/image/cover1-sm.jpg" srcset="/image/cover1.jpg 800w"></el-image>
+                <el-image fit="cover" class="home-right-cover" :class="coverIndex == 1 ? 'active' : ''" src="/image/cover2-sm.jpg" srcset="/image/cover2.jpg 800w"></el-image>
+                <el-image fit="cover" class="home-right-cover" :class="coverIndex == 2 ? 'active' : ''" src="/image/cover3-sm.jpg" srcset="/image/cover3.jpg 800w"></el-image>
             </div>
             <el-button id="prev" circle icon="el-icon el-icon-back" @click="onClick_prevCover"></el-button>
             <el-button id="next" circle icon="el-icon el-icon-right" @click="onClick_nextCover"></el-button>

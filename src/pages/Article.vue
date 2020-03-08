@@ -92,7 +92,7 @@ export default {
             let articleResponse = await this.$g.call("/article/get", "GET", params);
             if (articleResponse.data.error) {
                 this.$message({
-                    type: 'danger',
+                    type: 'error',
                     message: `${ articlesResponse.data.errorMsg }`
                 });
             } else {
@@ -109,7 +109,7 @@ export default {
             let repliesResponse = await this.$g.call("/reply/article", 'GET', params);
             if (repliesResponse.data.error) {
                 this.$message({
-                    type: 'danger',
+                    type: 'error',
                     message: `${ articlesResponse.data.errorMsg }`
                 });
             } else {
