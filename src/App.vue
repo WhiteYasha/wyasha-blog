@@ -7,7 +7,7 @@
 <script>
 export default {
     methods: {
-        onCreate_autoLogin: function() {
+        onCreate_autoLogin: function () {
             let email = sessionStorage.email,
                 password = sessionStorage.password;
         }
@@ -39,6 +39,7 @@ body,
 a {
     text-decoration: none;
 }
+
 a:hover {
     text-decoration: underline;
 }

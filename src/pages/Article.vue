@@ -3,9 +3,9 @@
     <el-header :height="'auto'">
         <main-menu :showMenu="false"></main-menu>
     </el-header>
-    <el-main class="article-main" v-if="article">
+    <el-main class="article-main">
         <el-page-header :title="$t('message.back')" @back="onClick_back"></el-page-header>
-        <div v-loading="articleLoading">
+        <div v-if="article">
             <h1 class="article-title">{{ article.title }}</h1>
             <el-row class="article-info" type="flex" align="middle" justify="space-between">
                 <el-col class="article-info-subTitle" :span="16" :xs="24">
@@ -15,15 +15,27 @@
                     <span>{{ $moment(article.time).format("YYYY/MM/DD HH:mm:ss") }}</span>
                 </el-col>
             </el-row>
-            <div class="article-content" v-html="article.content"></div>
+            <rich-text :text="article.content"></rich-text>
         </div>
+        <div id="placeholder" v-else v-loading="true"></div>
         <el-divider content-position="left">{{ $t("message.totalComment", {0: total}) }}</el-divider>
-        <div v-loading="commentLoading">
+        <div v-if="replies.length > 0" v-loading="commentLoading">
             <el-card shadow="never" v-for="reply in replies" :key="reply._id">
-                <article-comment :reply="reply"></article-comment>
+                <article-comment :reply="reply" :comment="onClick_comment"></article-comment>
             </el-card>
         </div>
+        <div v-else>
+            <div>{{ $t("message.noComment") }}</div>
+        </div>
         <el-pagination layout="prev, pager, next" :current-page="page" :page-size="pageSize" :total="total" background small></el-pagination>
+        <el-divider content-position="right">
+            <el-button type="text" @click="onClick_comment(null)">{{ $t("message.comment") }}</el-button>
+        </el-divider>
+        <el-input type="textarea" :rows="3" v-model="commentText" :placeholder="placeholder"></el-input>
+        <div :style="{ marginTop: '10px', textAlign: 'right' }">
+            <el-button type="success" size="small">{{ $t("message.send") }}</el-button>
+            <el-button type="info" size="small" @click="onClick_clear">{{ $t("message.clear") }}</el-button>
+        </div>
     </el-main>
     <el-footer :height="'auto'">
         <main-footer></main-footer>
@@ -35,26 +47,36 @@
 import mainMenu from './../components/mainMenu';
 import mainFooter from './../components/mainFooter';
 import articleComment from './../components/articleComment';
+import richText from './../components/richText';
 
 export default {
     components: {
         mainMenu,
         mainFooter,
-        articleComment
+        articleComment,
+        richText
     },
     data() {
         return {
             article: null,
+            context: "",
             replies: [],
-            articleLoading: true,
             commentLoading: true,
             pageSize: 5,
-            total: 0
+            total: 0,
+            commentText: "",
+            commentUser: null
         };
     },
     computed: {
-        page: function() {
+        page: function () {
             return isNaN(Number(this.$route.query.page)) ? 1 : Number(this.$route.query.page);
+        },
+        placeholder: function () {
+            if (this.commentUser) return this.$t("message.reply", {
+                0: this.commentUser.name
+            });
+            else return "";
         }
     },
     methods: {
@@ -95,6 +117,12 @@ export default {
                 this.total = repliesResponse.data.result.total;
                 this.commentLoading = false;
             }
+        },
+        onClick_comment: function (user) {
+            this.commentUser = user;
+        },
+        onClick_clear: function () {
+            this.commentText = "";
         }
     },
     created() {
@@ -110,11 +138,16 @@ $titleColor: #18191b;
 $contentColor: #52555a;
 $mutedColor: #a7abb3;
 
+#placeholder {
+    height: 300px;
+}
+
 .home-container {
     width: 100%;
     margin-top: 30px;
 
     .article-main {
+
         h1.article-title {
             margin: 10px 0;
             font-size: 32px;
@@ -128,20 +161,12 @@ $mutedColor: #a7abb3;
             .article-info-subTitle h4 {
                 margin: 0;
                 font-weight: 400;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
             }
 
             .article-info-detail {
                 font-size: 12px;
                 text-align: right;
             }
-        }
-
-        .article-content {
-            margin: 10px 0;
-            text-align: left;
         }
 
         .el-pagination {
@@ -154,6 +179,25 @@ $mutedColor: #a7abb3;
     margin-top: 20px;
 }
 
+.dialog-info {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 10px;
+
+    .el-avatar {
+        flex: 0 0 32px;
+    }
+
+    p {
+        margin: 0;
+        margin-left: .5em;
+        line-height: 32px;
+        height: 32px;
+        font-weight: 500;
+    }
+}
+
 @media screen and (min-width: 1000px) {
     .article-main {
         width: 80%;
@@ -162,6 +206,12 @@ $mutedColor: #a7abb3;
         h1.article-title,
         .article-info-subTitle {
             text-align: left;
+
+            h4 {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
         }
     }
 }

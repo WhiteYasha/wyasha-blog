@@ -34,7 +34,7 @@ export default {
         }
     },
     methods: {
-        onClick_comment: function() {
+        onClick_comment: function () {
             this.comment(this.reply.user);
         }
     }
@@ -64,8 +64,6 @@ $mutedColor: #a7abb3;
         flex-direction: column;
 
         .comment-right-header {
-            height: 32px;
-            line-height: 32px;
             display: flex;
             align-items: center;
 
@@ -97,6 +95,25 @@ $mutedColor: #a7abb3;
             .comment-reply {
                 color: $grayColor;
             }
+        }
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .comment-right-header {
+        height: 32px;
+        line-height: 32px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .comment-right-header {
+        flex-wrap: wrap;
+
+        .flex-gap,
+        i {
+            flex: 0 0 100%;
+            text-align: right;
         }
     }
 }

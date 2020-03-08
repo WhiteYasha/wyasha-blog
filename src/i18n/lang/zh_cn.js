@@ -19,11 +19,14 @@ const zh_cn = {
         "contact": "联系我",
         "saySomething": "有什么想对我说的",
         "send": "发送",
+        "cancel": "取消",
+        "clear": "清空",
         "login": "登录",
         "email": "邮箱",
         "password": "密码",
         "remember": "记住我",
-        "forget": "忘记密码"
+        "forget": "忘记密码",
+        "noComment": "还没有人评论"
     },
     skill: {
         "knowledge": "熟悉HTML5/CSS3及盒模型",

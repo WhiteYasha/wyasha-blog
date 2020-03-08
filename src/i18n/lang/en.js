@@ -19,11 +19,14 @@ const en = {
         "contact": "Contact Me",
         "saySomething": "What do you wanna say to me",
         "send": "Send",
+        "cancel": "Cancel",
+        "clear": "Clear",
         "login": "Login",
         "email": "Email",
         "password": "Password",
         "remember": "Remember me",
-        "forget": "Forget password"
+        "forget": "Forget password",
+        "noComment": "No comment yet"
     },
     skill: {
         "knowledge": "Familiar with HTML5 / CSS3 and box model",

@@ -141,8 +141,8 @@ $lightColor: #eaeaea;
 @media screen and (min-width: 1000px) {
     .header-menu {
         position: fixed;
-        top: 50px;
-        right: 150px;
+        top: 70px;
+        right: 100px;
     }
 }
 
@@ -155,7 +155,6 @@ $lightColor: #eaeaea;
             flex-wrap: wrap;
 
             li {
-                letter-spacing: .5em;
                 flex: 0 0 50%;
                 padding: 1em 0;
             }

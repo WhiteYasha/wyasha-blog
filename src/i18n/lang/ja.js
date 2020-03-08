@@ -19,11 +19,14 @@ const ja = {
         "contact": "私に連絡して",
         "saySomething": "私に何を言いたいですか",
         "send": "送る",
+        "cancel": "取り消し",
+        "clear": "クリア",
         "login": "ログインする",
         "email": "Eメール",
         "password": "パスワード",
         "remember": "私を覚えてますか",
-        "forget": "パスワードをお忘れですか"
+        "forget": "パスワードをお忘れですか",
+        "noComment": "まだコメントがありません"
     },
     skill: {
         "knowledge": "HTML5 / CSS3およびボックスモデルに精通している",
