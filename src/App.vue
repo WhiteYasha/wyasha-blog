@@ -1,6 +1,9 @@
 <template>
 <div id="app">
-    <router-view />
+    <transition name="el-fade-in">
+        <router-view />
+    </transition>
+    <el-backtop></el-backtop>
 </div>
 </template>
 
@@ -54,6 +57,11 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #b7b7b7;
+
+    * {
+        font-weight: 400;
+    }
 }
 
 @media screen and (min-width: 1440px) {

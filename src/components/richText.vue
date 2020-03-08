@@ -5,7 +5,6 @@
 <script>
 import marked from 'marked';
 import highlight from 'highlight.js';
-import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/night-owl.css';
 
 export default {

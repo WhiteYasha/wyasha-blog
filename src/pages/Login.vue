@@ -12,8 +12,8 @@
             </el-header>
             <el-main class="login-right-main">
                 <div class="login-content">
-                    <div class="login-content-info">
-                        <el-button type="text" size="mini" circle icon="el-icon el-icon-arrow-left" @click="onClick_back"></el-button>
+                    <div :style="{ textAlign: 'left' }">
+                        <el-button type="" size="mini" circle icon="el-icon el-icon-arrow-left" @click="onClick_back"></el-button>
                     </div>
                     <h1>{{ $t("message.login") }}</h1>
                     <el-form v-model="form">
@@ -32,7 +32,7 @@
                     </el-form>
                     <div class="login-content-info">
                         <router-link :to="{}">{{ $t("message.forget") }}</router-link>
-                        <router-link :to="{}">注册</router-link>
+                        <router-link :to="{}">{{ $t("message.signup") }}</router-link>
                     </div>
                 </div>
             </el-main>
@@ -153,6 +153,13 @@ $whiteColor: #fff;
             background: $whiteColor;
         }
 
+        .login-content-info {
+            flex-wrap: wrap;
+
+            >* {
+                flex: 0 0 100%;
+            }
+        }
     }
 }
 </style>

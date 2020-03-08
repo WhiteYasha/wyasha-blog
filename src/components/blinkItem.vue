@@ -5,7 +5,7 @@
             {{ blink.content }}
         </p>
         <div class="blink-item-images" v-show="blink.image.length > 0">
-            <el-image v-for="(img, i) in blink.image" :key="i" :src="img" :preview-src-list="blink.image"></el-image>
+            <el-image v-for="(img, i) in blink.image" :key="i" :src="img" :preview-src-list="blink.previewImage"></el-image>
         </div>
         <div class="blink-item-info" v-if="blink.replies">
             <i>{{ $moment(blink.time).format("YYYY/MM/DD HH:mm:ss") }}</i>
@@ -15,7 +15,10 @@
     <transition name="el-zoom-in-top">
         <div class="blink-item-reply" v-show="showReply" v-if="blink.replies">
             <article-comment v-for="reply in blink.replies" :key="reply._id" :reply="reply" :comment="onClick_comment"></article-comment>
-            <el-pagination :total="blink.replies.length" :page-size="pageSize" layout="prev, pager, next" small @current-change="onChange_page"></el-pagination>
+            <div id="nodata" v-show="blink.replies.length == 0">
+                <h4>{{ $t("message.noComment") }}</h4>
+            </div>
+            <el-pagination hide-on-single-page :total="blink.replies.length" :page-size="pageSize" layout="prev, pager, next" small @current-change="onChange_page"></el-pagination>
             <div class="blink-item-form">
                 <el-input type="textarea" v-model="text" :rows="2" :placeholder="placeholder"></el-input>
                 <el-button type="primary" size="mini">{{ $t("message.send") }}</el-button>

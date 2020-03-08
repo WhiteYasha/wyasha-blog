@@ -22,6 +22,7 @@ const en = {
         "cancel": "Cancel",
         "clear": "Clear",
         "login": "Login",
+        "signup": "Sign up",
         "email": "Email",
         "password": "Password",
         "remember": "Remember me",

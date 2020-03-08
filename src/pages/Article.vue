@@ -24,10 +24,10 @@
                 <article-comment :reply="reply" :comment="onClick_comment"></article-comment>
             </el-card>
             <div id="nodata" v-show="replies.length == 0">
-                <h1>{{ $t("message.noComment") }}</h1>
+                <h4>{{ $t("message.noComment") }}</h4>
             </div>
         </div>
-        <el-pagination layout="prev, pager, next" :current-page="page" :page-size="pageSize" :total="total" background small></el-pagination>
+        <el-pagination hide-on-single-page layout="prev, pager, next" :current-page="page" :page-size="pageSize" :total="total" background small></el-pagination>
         <el-divider content-position="right">
             <el-button type="text" @click="onClick_comment(null)">{{ $t("message.comment") }}</el-button>
         </el-divider>

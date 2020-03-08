@@ -23,6 +23,7 @@ const ja = {
         "clear": "クリア",
         "login": "ログインする",
         "email": "Eメール",
+        "signup": "サインアップ",
         "password": "パスワード",
         "remember": "私を覚えてますか",
         "forget": "パスワードをお忘れですか",
