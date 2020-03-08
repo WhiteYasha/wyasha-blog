@@ -13,8 +13,8 @@
             </div>
         </el-main>
         <el-footer class="blink-pagination" :height="'auto'">
-            <el-pagination id="pagination" layout="prev, pager, next, jumper" background :total="total" :page-size="pageSize"></el-pagination>
-            <el-pagination id="pagination-small" layout="prev, pager, next" background small :total="total" :page-size="pageSize"></el-pagination>
+            <el-pagination id="pagination" layout="prev, pager, next, jumper" background :total="total" :page-size="pageSize" @current-change="onChange_page"></el-pagination>
+            <el-pagination id="pagination-small" layout="prev, pager, next" background small :total="total" :page-size="pageSize" @current-change="onChange_page"></el-pagination>
         </el-footer>
     </el-container>
     <el-footer :height="'auto'">
@@ -75,6 +75,13 @@ export default {
                 this.blinks = blinks;
                 this.blinkLoading = false;
             }
+        },
+        onChange_page: function (currentPage) {
+            this.$router.push({
+                query: {
+                    page: currentPage
+                }
+            });
         }
     },
     created() {

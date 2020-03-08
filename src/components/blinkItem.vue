@@ -15,7 +15,7 @@
     <transition name="el-zoom-in-top">
         <div class="blink-item-reply" v-show="showReply" v-if="blink.replies">
             <article-comment v-for="reply in blink.replies" :key="reply._id" :reply="reply" :comment="onClick_comment"></article-comment>
-            <el-pagination :total="3" layout="prev, pager, next" small></el-pagination>
+            <el-pagination :total="blink.replies.length" :page-size="pageSize" layout="prev, pager, next" small @current-change="onChange_page"></el-pagination>
             <div class="blink-item-form">
                 <el-input type="textarea" v-model="text" :rows="2" :placeholder="placeholder"></el-input>
                 <el-button type="primary" size="mini">{{ $t("message.send") }}</el-button>
@@ -39,7 +39,9 @@ export default {
         return {
             showReply: false,
             text: "",
-            replyUser: null
+            replyUser: null,
+            page: 1,
+            pageSize: 5
         }
     },
     computed: {
@@ -48,6 +50,11 @@ export default {
                 0: this.replyUser.name
             });
             else return "";
+        },
+        currentReplies: function () {
+            let min = Math.max(0, (this.page - 1) * this.pageSize),
+                max = Math.min(this.blink.replies.length, this.page * this.pageSize);
+            return this.blink.replies.slice(min, max);
         }
     },
     methods: {
@@ -60,6 +67,9 @@ export default {
             } else {
                 this.replyUser = user;
             }
+        },
+        onChange_page: function (page) {
+            this.page = page;
         }
     }
 }

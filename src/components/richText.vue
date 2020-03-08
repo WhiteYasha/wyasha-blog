@@ -31,17 +31,22 @@ export default {
                 smartypants: false,
                 xhtml: false
             });
-            let text = this.text.replace(/\\n/g, "\n");
-            return marked(text).replace(/<pre>/g, "<pre class='hljs'>");
+            return marked(this.text).replace(/<pre>/g, "<pre class='hljs'>");
         }
     }
 }
 </script>
 
 <style lang="scss">
+$themeColor: #C81912;
+
 #rich {
     margin: 10px 0;
     text-align: left;
+
+    a {
+        color: $themeColor;
+    }
 
     blockquote {
         margin: 0;

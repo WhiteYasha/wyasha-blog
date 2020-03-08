@@ -19,13 +19,13 @@
         </div>
         <div id="placeholder" v-else v-loading="true"></div>
         <el-divider content-position="left">{{ $t("message.totalComment", {0: total}) }}</el-divider>
-        <div v-if="replies.length > 0" v-loading="commentLoading">
+        <div v-loading="commentLoading">
             <el-card shadow="never" v-for="reply in replies" :key="reply._id">
                 <article-comment :reply="reply" :comment="onClick_comment"></article-comment>
             </el-card>
-        </div>
-        <div v-else>
-            <div>{{ $t("message.noComment") }}</div>
+            <div id="nodata" v-show="replies.length == 0">
+                <h1>{{ $t("message.noComment") }}</h1>
+            </div>
         </div>
         <el-pagination layout="prev, pager, next" :current-page="page" :page-size="pageSize" :total="total" background small></el-pagination>
         <el-divider content-position="right">
