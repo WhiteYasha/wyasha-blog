@@ -30,8 +30,8 @@
                     <el-form-item>
                         <el-input type="textarea" v-model="form.content" :rows="3" :placeholder="$t('message.saySomething')" autofocus />
                     </el-form-item>
-                    <el-form-item>
-                        <el-button type="success">{{ $t("message.send") }}</el-button>
+                    <el-form-item :style="{ textAlign: 'right' }">
+                        <el-button type="success" size="small" @click="onClick_send">{{ $t("message.send") }}</el-button>
                     </el-form-item>
                 </el-form>
             </el-main>
@@ -59,6 +59,13 @@ export default {
                 content: ""
             }
         };
+    },
+    methods: {
+        onClick_send: function () {
+            this.$alert(this.$t("developing"), {
+                type: 'warning'
+            });
+        }
     }
 }
 </script>

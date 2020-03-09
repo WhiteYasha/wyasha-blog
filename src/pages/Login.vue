@@ -31,8 +31,8 @@
                         </el-form-item>
                     </el-form>
                     <div class="login-content-info">
-                        <el-button type="text" @click="onClick_forget">{{ $t("message.forget") }}</el-button>
-                        <el-button type="text" @click="onClick_signup">{{ $t("message.signup") }}</el-button>
+                        <el-button type="text" @click="onClick_forget" size="mini">{{ $t("message.forget") }}</el-button>
+                        <el-button type="text" @click="onClick_signup" size="mini">{{ $t("message.signup") }}</el-button>
                     </div>
                 </div>
             </el-main>
@@ -162,7 +162,6 @@ $whiteColor: #fff;
 
 .home-container {
     width: 100%;
-    height: 100%;
 
     .login-container {
         width: 100%;
@@ -209,12 +208,16 @@ $whiteColor: #fff;
 }
 
 @media screen and (min-width: 1000px) {
-    .login-left-container {
-        flex: 0 0 40%;
-    }
+    .home-container {
+        height: 100%;
 
-    .login-content {
-        width: 50%;
+        .login-left-container {
+            flex: 0 0 40%;
+        }
+
+        .login-content {
+            width: 50%;
+        }
     }
 }
 
@@ -241,6 +244,10 @@ $whiteColor: #fff;
 
             >* {
                 flex: 0 0 100%;
+            }
+
+            .el-button+.el-button {
+                margin: 0;
             }
         }
     }
