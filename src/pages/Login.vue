@@ -11,28 +11,28 @@
                 <main-menu :showMenu="false" :showAvatar="false"></main-menu>
             </el-header>
             <el-main class="login-right-main">
-                <div class="login-content">
+                <div class="login-content" v-loading="loading">
                     <div :style="{ textAlign: 'left' }">
                         <el-button type="" size="mini" circle icon="el-icon el-icon-arrow-left" @click="onClick_back"></el-button>
                     </div>
                     <h1>{{ $t("message.login") }}</h1>
-                    <el-form v-model="form">
-                        <el-form-item>
+                    <el-form :model="form" ref="form" :rules="rules" :show-message="false">
+                        <el-form-item prop="email">
                             <el-input v-model="form.email" :placeholder="$t('message.email')"></el-input>
                         </el-form-item>
-                        <el-form-item>
+                        <el-form-item prop="password">
                             <el-input v-model="form.password" type="password" :placeholder="$t('message.password')"></el-input>
                         </el-form-item>
-                        <el-form-item :style="{ textAlign: 'left' }">
+                        <el-form-item :style="{ textAlign: 'left' }" prop="remember">
                             <el-checkbox v-model="form.remember">{{ $t("message.remember") }}</el-checkbox>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary">{{ $t("message.login") }}</el-button>
+                            <el-button type="primary" @click="onClick_login('form')">{{ $t("message.login") }}</el-button>
                         </el-form-item>
                     </el-form>
                     <div class="login-content-info">
-                        <router-link :to="{}">{{ $t("message.forget") }}</router-link>
-                        <router-link :to="{}">{{ $t("message.signup") }}</router-link>
+                        <el-button type="text" @click="onClick_forget">{{ $t("message.forget") }}</el-button>
+                        <el-button type="text" @click="onClick_signup">{{ $t("message.signup") }}</el-button>
                     </div>
                 </div>
             </el-main>
@@ -54,19 +54,88 @@ export default {
         mainFooter,
         mainMenu
     },
+    watch: {
+        locale: function () {
+            this.$forceUpdate();
+        }
+    },
+    computed: {
+        locale: function () {
+            return this.$i18n.locale;
+        }
+    },
     data() {
         return {
             form: {
                 email: "",
                 password: "",
                 remember: false
-            }
+            },
+            rules: {
+                email: [{
+                        required: true
+                    },
+                    {
+                        type: "email"
+                    }
+                ],
+                password: [{
+                    required: true
+                }]
+            },
+            loading: false
         }
     },
     methods: {
         onClick_back: function () {
             this.$router.push({
                 name: "Home"
+            });
+        },
+        onClick_login: function (formName) {
+            this.$refs[formName].validate(async (valid) => {
+                if (valid) {
+                    this.loading = true;
+                    let params = {
+                        email: this.form.email,
+                        password: this.form.password
+                    };
+                    let response = await this.$g.call("/auth/login", "GET", params);
+                    if (response.data.error) {
+                        this.$message({
+                            type: "error",
+                            message: response.data.errorMsg
+                        });
+                    } else {
+                        if (this.form.remember) {
+                            sessionStorage.setItem("email", this.form.email);
+                            sessionStorage.setItem("password", this.form.password);
+                        }
+                        this.$message({
+                            type: "success",
+                            message: "登录成功"
+                        });
+                        this.$store.state.user = response.data.result;
+                        this.$store.state.isLoggedIn = true;
+                        this.$router.go(-1);
+                    }
+                    this.loading = false;
+                } else {
+                    this.$message({
+                        type: "info",
+                        message: this.$t("message.errorForm")
+                    });
+                }
+            });
+        },
+        onClick_forget: function () {
+            this.$alert(this.$t("developing"), {
+                type: 'warning'
+            });
+        },
+        onClick_signup: function () {
+            this.$alert(this.$t("developing"), {
+                type: 'warning'
             });
         }
     }

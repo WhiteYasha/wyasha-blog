@@ -10,9 +10,20 @@
 <script>
 export default {
     methods: {
-        onCreate_autoLogin: function () {
+        onCreate_autoLogin: async function () {
             let email = sessionStorage.email,
                 password = sessionStorage.password;
+            if (email && password) {
+                let params = {
+                    email,
+                    password
+                };
+                let response = await this.$g.call("/auth/login", "GET", params);
+                if (!response.data.error) {
+                    this.$store.state.user = response.data.result;
+                    this.$store.state.isLoggedIn = true;
+                }
+            }
         }
     },
     created() {

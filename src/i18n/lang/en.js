@@ -19,6 +19,7 @@ const en = {
         "contact": "Contact Me",
         "saySomething": "What do you wanna say to me",
         "send": "Send",
+        "confirm": "Confirm",
         "cancel": "Cancel",
         "clear": "Clear",
         "login": "Login",
@@ -29,7 +30,8 @@ const en = {
         "forget": "Forget password",
         "noComment": "No comment yet",
         "noArticle": "No article yet",
-        "noBlink": "No blink yet"
+        "noBlink": "No blink yet",
+        "errorForm": "Please fill in the correct email address and password"
     },
     skill: {
         "knowledge": "Familiar with HTML5 / CSS3 and box model",
@@ -39,7 +41,8 @@ const en = {
         "frame": "Master the use of React / Vue framework",
         "tools": "Understand the use of Webpack, Git and other tools",
         "backend": "Understand the use of Node.js and Express frameworks"
-    }
+    },
+    "developing": "Sorry, this function is under development"
 };
 
 export default en;

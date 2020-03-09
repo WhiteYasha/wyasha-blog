@@ -19,7 +19,8 @@ const ja = {
         "contact": "私に連絡して",
         "saySomething": "私に何を言いたいですか",
         "send": "送る",
-        "cancel": "取り消し",
+        "confirm": "確認",
+        "cancel": "キャンセル",
         "clear": "クリア",
         "login": "ログインする",
         "email": "Eメール",
@@ -29,7 +30,8 @@ const ja = {
         "forget": "パスワードをお忘れですか",
         "noComment": "まだコメントがありません",
         "noArticle": "記事がありません",
-        "noBlink": "インスタントがありません"
+        "noBlink": "インスタントがありません",
+        "errorForm": "正しいメールアドレスとパスワードを入力してください"
     },
     skill: {
         "knowledge": "HTML5 / CSS3およびボックスモデルに精通している",
@@ -39,7 +41,8 @@ const ja = {
         "frame": "React / Vueフレームワークの使用をマスターする",
         "tools": "Webpack、Git、およびその他のツールの使用を理解する",
         "backend": "Node.jsおよびExpressフレームワークの使用を理解する"
-    }
+    },
+    "developing": "申し訳ありませんが、この機能は開発中です"
 };
 
 export default ja;

@@ -19,6 +19,7 @@ const zh_cn = {
         "contact": "联系我",
         "saySomething": "有什么想对我说的",
         "send": "发送",
+        "confirm": "确定",
         "cancel": "取消",
         "clear": "清空",
         "login": "登录",
@@ -29,7 +30,8 @@ const zh_cn = {
         "forget": "忘记密码",
         "noComment": "还没有人评论",
         "noArticle": "还没有文章",
-        "noBlink": "还没有动态"
+        "noBlink": "还没有动态",
+        "errorForm": "请填写正确的邮箱地址和密码"
     },
     skill: {
         "knowledge": "熟悉HTML5/CSS3及盒模型",
@@ -39,7 +41,8 @@ const zh_cn = {
         "frame": "掌握React/Vue框架的使用",
         "tools": "了解Webpack、Git等工具的使用",
         "backend": "了解Node.js和Express框架的使用"
-    }
+    },
+    "developing": "抱歉，该功能尚处于开发中"
 };
 
 export default zh_cn;
