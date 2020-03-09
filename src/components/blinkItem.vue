@@ -5,7 +5,7 @@
             {{ blink.content }}
         </p>
         <div class="blink-item-images" v-show="blink.image.length > 0">
-            <el-image v-for="(img, i) in blink.image" :key="i" :src="img" :preview-src-list="blink.previewImage"></el-image>
+            <el-image fit="cover" v-for="(img, i) in blink.image" :key="i" :src="img" :preview-src-list="blink.image"></el-image>
         </div>
         <div class="blink-item-info" v-if="blink.replies">
             <i>{{ $moment(blink.time).format("YYYY/MM/DD HH:mm:ss") }}</i>
@@ -21,7 +21,7 @@
             <el-pagination hide-on-single-page :total="blink.replies.length" :page-size="pageSize" layout="prev, pager, next" small @current-change="onChange_page"></el-pagination>
             <div class="blink-item-form">
                 <el-input type="textarea" v-model="text" :rows="2" :placeholder="placeholder"></el-input>
-                <el-button type="primary" size="mini">{{ $t("message.send") }}</el-button>
+                <el-button type="primary" size="mini" @click="onClick_send">{{ $t("message.send") }}</el-button>
             </div>
         </div>
     </transition>
@@ -73,6 +73,11 @@ export default {
         },
         onChange_page: function (page) {
             this.page = page;
+        },
+        onClick_send: function () {
+            this.$alert(this.$t("developing"), {
+                type: 'warning'
+            });
         }
     }
 }
@@ -168,8 +173,14 @@ $grayColor: #f7f7f7;
         flex-wrap: wrap;
 
         .el-image {
-            flex: 0 0 45%;
+            flex: 0 0 33%;
         }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .blink-item-images .el-image {
+        flex: 0 0 45%;
     }
 }
 </style>

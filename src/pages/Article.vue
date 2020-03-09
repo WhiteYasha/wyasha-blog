@@ -33,7 +33,7 @@
         </el-divider>
         <el-input type="textarea" :rows="3" v-model="commentText" :placeholder="placeholder"></el-input>
         <div :style="{ marginTop: '10px', textAlign: 'right' }">
-            <el-button type="success" size="small">{{ $t("message.send") }}</el-button>
+            <el-button type="success" size="small" @click="onClick_send">{{ $t("message.send") }}</el-button>
             <el-button type="info" size="small" @click="onClick_clear">{{ $t("message.clear") }}</el-button>
         </div>
     </el-main>
@@ -123,6 +123,11 @@ export default {
         },
         onClick_clear: function () {
             this.commentText = "";
+        },
+        onClick_send: function () {
+            this.$alert(this.$t("developing"), {
+                type: 'warning'
+            });
         }
     },
     created() {

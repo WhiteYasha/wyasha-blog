@@ -1,6 +1,6 @@
 <template>
 <div class="header-container">
-    <el-badge is-dot :hidden="true">
+    <el-badge is-dot :hidden="!$store.isUnread">
         <el-avatar v-if="showAvatar" :size="40" :src="avatar" @click.native="onClick_showUser"></el-avatar>
     </el-badge>
     <div class="header-right">

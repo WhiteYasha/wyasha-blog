@@ -21,7 +21,21 @@ export default {
                 let response = await this.$g.call("/auth/login", "GET", params);
                 if (!response.data.error) {
                     this.$store.state.user = response.data.result;
+                    this.initUnreadReplies(this.$store.state.user._id);
                     this.$store.state.isLoggedIn = true;
+                }
+            }
+        },
+        initUnreadReplies: async function (to_uid) {
+            if (to_uid) {
+                let params = {
+                    to_uid: to_uid,
+                    page: 1,
+                    pageSize: 0
+                };
+                let repliesReponse = await this.$g.call("/reply/isUnread", "GET", params);
+                if (!repliesReponse.data.error) {
+                    this.$store.isUnread = repliesReponse.data.result > 0;
                 }
             }
         }

@@ -111,6 +111,7 @@ export default {
                             sessionStorage.setItem("email", this.form.email);
                             sessionStorage.setItem("password", this.form.password);
                         }
+                        this.initUnreadReplies(response.data.result._id);
                         this.$message({
                             type: "success",
                             message: "登录成功"
@@ -137,6 +138,19 @@ export default {
             this.$alert(this.$t("developing"), {
                 type: 'warning'
             });
+        },
+        initUnreadReplies: async function (to_uid) {
+            if (to_uid) {
+                let params = {
+                    to_uid: to_uid,
+                    page: 1,
+                    pageSize: 0
+                };
+                let repliesReponse = await this.$g.call("/reply/isUnread", "GET", params);
+                if (!repliesReponse.data.error) {
+                    this.$store.isUnread = repliesReponse.data.result > 0;
+                }
+            }
         }
     }
 }
