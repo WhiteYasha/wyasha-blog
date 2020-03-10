@@ -14,7 +14,7 @@ const zh_cn = {
         "comment": "评论",
         "totalComment": "共{0}条评论",
         "showAll": "查看全文",
-        "introduction": "家乡浙江金华，杭州师范大学软件工程系大三在读学生，主攻前端方向。宅，平时比较喜欢听摇滚乐、玩拼装模型，偶尔也会运动一下打打篮球。最喜欢的作品是机动战士高达系列，最喜欢的乐队是Ramones。",
+        "introduction": "家乡浙江金华，杭州师范大学软件工程系大三在读学生，主攻前端方向。平时比较喜欢听摇滚乐、玩拼装模型，偶尔也会运动一下打打篮球。最喜欢的作品是机动战士高达系列，最喜欢的乐队是Ramones。",
         "skillStack": "技能栈",
         "contact": "联系我",
         "saySomething": "有什么想对我说的",
@@ -42,6 +42,12 @@ const zh_cn = {
         "tools": "了解Webpack、Git等工具的使用",
         "backend": "了解Node.js和Express框架的使用"
     },
+    "timedOut": "请求超时",
+    "connectFail": "连接失败",
+    "notFoundTitle": "糟糕，迷路了",
+    "notFoundContent": "这个页面不存在，请确保你访问了正确的地址",
+    "errorTitle": "服务器开小差了",
+    "errorContent": "服务器发生错误，请稍后再试",
     "developing": "抱歉，该功能尚处于开发中"
 };
 

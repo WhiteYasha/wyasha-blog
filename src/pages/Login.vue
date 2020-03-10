@@ -101,12 +101,7 @@ export default {
                         password: this.form.password
                     };
                     let response = await this.$g.call("/auth/login", "GET", params);
-                    if (response.data.error) {
-                        this.$message({
-                            type: "error",
-                            message: response.data.errorMsg
-                        });
-                    } else {
+                    if (!response.data.error) {
                         if (this.form.remember) {
                             sessionStorage.setItem("email", this.form.email);
                             sessionStorage.setItem("password", this.form.password);

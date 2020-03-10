@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const Home = () => import('./../pages/Home');
-const NotFound = () => import('./../pages/404');
-const About = () => import('./../pages/About');
-const ArticleList = () => import('./../pages/ArticleList');
-const Article = () => import('./../pages/Article');
-const Login = () => import('./../pages/Login');
-const Blink = () => import('./../pages/Blink');
+import Home from '@/pages/Home';
+import NotFound from '@/pages/404';
+import Error from '@/pages/500';
+import About from '@/pages/About';
+import ArticleList from '@/pages/ArticleList';
+import Article from '@/pages/Article';
+import Login from '@/pages/Login';
+import Blink from '@/pages/Blink';
 
 Vue.use(VueRouter)
 
@@ -18,8 +19,13 @@ const routes = [{
 	},
 	{
 		path: '*',
-		name: '404',
+		name: 'NotFound',
 		component: NotFound
+	},
+	{
+		path: "/500",
+		name: "Error",
+		component: Error
 	},
 	{
 		path: "/about",
@@ -56,16 +62,6 @@ const router = new VueRouter({
 
 router.afterEach((to, from, next) => {
 	window.scrollTo(0, 0);
-});
-router.onError((error) => {
-	const pattern = /Loading chunk (\d)+ failed/g;
-	const isChunkLoadFailed = error.message.match(pattern);
-	if (isChunkLoadFailed) {
-		location.reload();
-		// const targetPath = $router.history.pending.fullPath;
-		// $router.replace(targetPath);
-	}
-
 });
 
 export default router

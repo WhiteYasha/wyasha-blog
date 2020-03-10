@@ -42,6 +42,12 @@ const en = {
         "tools": "Understand the use of Webpack, Git and other tools",
         "backend": "Understand the use of Node.js and Express frameworks"
     },
+    "timedOut": "Request Timed Out",
+    "connectFail": "Connection Failed",
+    "notFoundTitle": "OH NO.GOT LOST",
+    "notFoundContent": "Page does not exist. Please make sure that you visit the correct address.",
+    "errorTitle": "SORRY.SERVER HAS DISTRACTED",
+    "errorContent": "Server error, please try again later",
     "developing": "Sorry, this function is under development"
 };
 

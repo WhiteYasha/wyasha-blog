@@ -71,12 +71,7 @@ export default {
                 pageSize: this.pageSize
             };
             let articlesResponse = await this.$g.call("/article", "GET", params);
-            if (articlesResponse.data.error) {
-                this.$message({
-                    type: 'error',
-                    message: `${ articlesResponse.data.errorMsg }`
-                });
-            } else {
+            if (!articlesResponse.data.error) {
                 this.total = articlesResponse.data.result.total;
                 this.articles = articlesResponse.data.result.articles;
                 this.loading = false;

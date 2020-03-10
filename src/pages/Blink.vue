@@ -55,12 +55,7 @@ export default {
                 pageSize: this.pageSize
             };
             let blinksResponse = await this.$g.call("/blink", "GET", params);
-            if (blinksResponse.data.error) {
-                this.$message({
-                    type: 'error',
-                    message: `${ articlesResponse.data.errorMsg }`
-                });
-            } else {
+            if (!blinksResponse.data.error) {
                 this.total = blinksResponse.data.result.total;
                 let blinks = [];
                 for (var i = 0; i < blinksResponse.data.result.blinks.length; i++) {
@@ -68,9 +63,11 @@ export default {
                         bid: blinksResponse.data.result.blinks[i]._id
                     };
                     let repliesResponse = await this.$g.call("/reply/blink", "GET", params);
-                    blinks.push(Object.assign(blinksResponse.data.result.blinks[i], {
-                        replies: repliesResponse.data.result
-                    }));
+                    if (!repliesResponse.data.error) {
+                        blinks.push(Object.assign(blinksResponse.data.result.blinks[i], {
+                            replies: repliesResponse.data.result
+                        }));
+                    }
                 }
                 this.blinks = blinks;
                 this.blinkLoading = false;

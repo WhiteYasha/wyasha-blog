@@ -42,6 +42,12 @@ const ja = {
         "tools": "Webpack、Git、およびその他のツールの使用を理解する",
         "backend": "Node.jsおよびExpressフレームワークの使用を理解する"
     },
+    "timedOut": "リクエストはタイムアウトしました",
+    "connectFail": "接続に失敗しました",
+    "notFoundTitle": "ああ、いなくなった",
+    "notFoundContent": "ページが存在しません。 必ず正しい住所にアクセスしてください。",
+    "errorTitle": "ごめんなさい、サーバーが気を取られた",
+    "errorContent": "サーバーエラーです。しばらくしてからもう一度お試しください",
     "developing": "申し訳ありませんが、この機能は開発中です"
 };
 

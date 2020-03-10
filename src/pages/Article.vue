@@ -90,14 +90,10 @@ export default {
                 aid: this.$route.params.id
             };
             let articleResponse = await this.$g.call("/article/get", "GET", params);
-            if (articleResponse.data.error) {
-                this.$message({
-                    type: 'error',
-                    message: `${ articlesResponse.data.errorMsg }`
-                });
-            } else {
+            if (!articleResponse.data.error) {
                 this.article = articleResponse.data.result;
                 this.articleLoading = false;
+                this.initReplies();
             }
         },
         initReplies: async function () {
@@ -107,12 +103,7 @@ export default {
                 pageSize: this.pageSize
             };
             let repliesResponse = await this.$g.call("/reply/article", 'GET', params);
-            if (repliesResponse.data.error) {
-                this.$message({
-                    type: 'error',
-                    message: `${ articlesResponse.data.errorMsg }`
-                });
-            } else {
+            if (!repliesResponse.data.error) {
                 this.replies = repliesResponse.data.result.replies;
                 this.total = repliesResponse.data.result.total;
                 this.commentLoading = false;
@@ -132,7 +123,6 @@ export default {
     },
     created() {
         this.initArticle();
-        this.initReplies();
     }
 }
 </script>

@@ -8,8 +8,54 @@ import {
     enUS,
     zhCN
 } from 'date-fns/locale';
+import {
+    Message
+} from 'element-ui';
+import router from './../router/index';
+import i18n from './../i18n/i18n';
 
-const host = "http://localhost:9000"
+const host = "http://localhost:9000";
+
+const _handleErrorPage = (code, message) => {
+    if (code == 500) {
+        Message.error(message);
+        router.push({
+            name: "Error"
+        });
+    } else {
+        router.push({
+            name: "NotFound"
+        });
+    }
+};
+
+axios.interceptors.request.use((config) => {
+    return config;
+}, err => {
+    Message.error({
+        message: i18n.t("timedOut")
+    });
+    return Promise.resolve(err);
+});
+axios.interceptors.response.use((data) => {
+    if (data.status && data.status == 200 && data.data.error) {
+        Message.error({
+            message: data.data.errorMsg
+        });
+    }
+    return data;
+}, (err) => {
+    if (err && err.response) {
+        let code = err.response.status,
+            message = err.response.data;
+        _handleErrorPage(code, message);
+    } else {
+        Message.error({
+            message: i18n.t("connectFail")
+        });
+    }
+    return Promise.reject(err);
+});
 
 export function call(api, methods, params) {
     if (methods.toUpperCase() == "GET") return axios.get(host + api, {

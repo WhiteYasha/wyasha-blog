@@ -15,12 +15,12 @@
     </el-header>
     <el-main class=content-main>
         <div class="content">
-            <h1>404</h1>
-            <h4>{{ $t("notFoundTitle") }}</h4>
-            <p>{{ $t("notFoundContent") }}</p>
+            <h1>500</h1>
+            <h4>{{ $t("errorTitle") }}</h4>
+            <p>{{ $t("errorContent") }}</p>
             <div class="content-reload">
-                <i class="el-icon el-icon-refresh-right" @click="onClick_reload"></i>
-                Reload
+                <i class="el-icon el-icon-s-home" @click="onClick_gotoHome"></i>
+                Home
             </div>
         </div>
     </el-main>
@@ -38,8 +38,10 @@ export default {
         mainFooter
     },
     methods: {
-        onClick_reload: function () {
-            window.location.reload();
+        onClick_gotoHome: function () {
+            this.$router.push({
+                name: "Home"
+            });
         },
         onClick_changeLocale: function (command) {
             localStorage.setItem("lang", command);
