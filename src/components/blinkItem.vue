@@ -8,7 +8,7 @@
             <el-image fit="cover" v-for="(img, i) in blink.image" :key="i" :src="img" :preview-src-list="blink.image"></el-image>
         </div>
         <div class="blink-item-info" v-if="blink.replies">
-            <i>{{ $moment(blink.time).format("YYYY/MM/DD HH:mm:ss") }}</i>
+            <i>{{ $g.fromNow(blink.time, $i18n.locale) }}</i>
             <el-button type="text" size="mini" @click="onClick_toggleReply">{{ $t("message.comment") }}({{ blink.replies.length }})</el-button>
         </div>
     </div>

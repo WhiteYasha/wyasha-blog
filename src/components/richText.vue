@@ -4,7 +4,7 @@
 
 <script>
 import marked from 'marked';
-import highlight from 'highlight.js';
+// import highlight from 'highlight.js';
 import 'highlight.js/styles/night-owl.css';
 
 export default {
@@ -19,7 +19,7 @@ export default {
             marked.setOptions({
                 renderer: new marked.Renderer(),
                 highlight: function (code) {
-                    return highlight.highlightAuto(code).value;
+                    return hljs.highlightAuto(code).value;
                 },
                 pedantic: false,
                 gfm: true,
@@ -30,7 +30,8 @@ export default {
                 smartypants: false,
                 xhtml: false
             });
-            return marked(this.text).replace(/<pre>/g, "<pre class='hljs'>");
+            let text = this.text.replace(/\\"/g, "\"").replace(/\\'/g, "'");
+            return marked(text).replace(/<pre>/g, "<pre class='hljs'>");
         }
     }
 }

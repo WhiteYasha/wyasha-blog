@@ -8,7 +8,7 @@
             <p>{{ reply.user.name }}</p>
             <p v-if="reply.replyUser">{{ $t("message.reply", {0: reply.replyUser.name}) }}</p>
             <div class="flex-gap"></div>
-            <i>{{ $moment(reply.replyTime).fromNow() }}</i>
+            <i>{{ $g.f(reply.replyTime, "yyyy/MM/dd") }}</i>
         </div>
         <div class="comment-right-main" v-if="reply.content" v-html="replyContent"></div>
         <div class="comment-right-footer">

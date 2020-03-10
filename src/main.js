@@ -7,13 +7,13 @@ import ElementUI from 'element-ui';
 import './style/theme/index.css';
 // import 'element-ui/lib/theme-chalk/display.css';
 import i18n from './i18n/i18n';
-import moment from 'moment';
+// import moment from 'moment';
 import * as g from './js/global';
 
 Vue.use(ElementUI);
-moment.locale(i18n.locale);
+// moment.locale(i18n.locale);
 
-Vue.prototype.$moment = moment;
+// Vue.prototype.$moment = moment;
 Vue.prototype.$g = g;
 Vue.config.productionTip = false
 

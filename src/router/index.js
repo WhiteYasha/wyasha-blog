@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from './../pages/Home';
-import NotFound from './../pages/404';
-import About from './../pages/About';
-import ArticleList from './../pages/ArticleList';
-import Article from './../pages/Article';
-import Login from './../pages/Login';
-import Blink from './../pages/Blink';
+const Home = () => import('./../pages/Home');
+const NotFound = () => import('./../pages/404');
+const About = () => import('./../pages/About');
+const ArticleList = () => import('./../pages/ArticleList');
+const Article = () => import('./../pages/Article');
+const Login = () => import('./../pages/Login');
+const Blink = () => import('./../pages/Blink');
 
 Vue.use(VueRouter)
 

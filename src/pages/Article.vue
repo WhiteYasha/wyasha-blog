@@ -12,7 +12,7 @@
                     <h4 v-if="article.subTitle">{{ article.subTitle }}</h4>
                 </el-col>
                 <el-col class="article-info-detail" :span="8" :xs="24">
-                    <span>{{ $moment(article.time).format("YYYY/MM/DD HH:mm:ss") }}</span>
+                    <span>{{ $g.f(article.time, "yyyy/MM/dd HH:mm:ss") }}</span>
                 </el-col>
             </el-row>
             <rich-text :text="article.content"></rich-text>

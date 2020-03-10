@@ -76,7 +76,7 @@ export default {
         onClick_changeLocale: function (command) {
             localStorage.setItem("lang", command);
             this.$i18n.locale = command;
-            this.$moment.locale(command);
+            // this.$moment.locale(command);
         }
     }
 }
