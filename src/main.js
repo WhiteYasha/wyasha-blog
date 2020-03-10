@@ -15,7 +15,7 @@ Vue.use(ElementUI);
 
 // Vue.prototype.$moment = moment;
 Vue.prototype.$g = g;
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   router,

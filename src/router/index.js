@@ -54,4 +54,18 @@ const router = new VueRouter({
 	routes
 });
 
+router.afterEach((to, from, next) => {
+	window.scrollTo(0, 0);
+});
+router.onError((error) => {
+	const pattern = /Loading chunk (\d)+ failed/g;
+	const isChunkLoadFailed = error.message.match(pattern);
+	if (isChunkLoadFailed) {
+		location.reload();
+		// const targetPath = $router.history.pending.fullPath;
+		// $router.replace(targetPath);
+	}
+
+});
+
 export default router
