@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const host = "http://localhost:9000"
+const host = "http://47.111.165.97:9000";
 
 export function call(api, methods, params) {
     if (methods.toUpperCase() == "GET") return axios.get(host + api, {
