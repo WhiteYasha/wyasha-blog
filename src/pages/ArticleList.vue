@@ -12,8 +12,8 @@
                 </div>
             </el-main>
             <el-footer :height="'auto'" class="list-left-footer">
-                <el-pagination hide-on-single-page id="pagination" :current-page="page" :page-size="pageSize" :total="total" background layout="prev, pager, next, jumper" @current-change="onChange_page"></el-pagination>
-                <el-pagination hide-on-single-page id="pagination-small" :current-page="page" :page-size="pageSize" :total="total" background small layout="prev, pager, next" @current-change="onChange_page"></el-pagination>
+                <el-pagination hide-on-single-page id="pagination" :page-size="pageSize" :total="total" background layout="prev, pager, next, jumper" @current-change="onChange_page"></el-pagination>
+                <el-pagination hide-on-single-page id="pagination-small" :page-size="pageSize" :total="total" background small layout="prev, pager, next" @current-change="onChange_page"></el-pagination>
             </el-footer>
         </el-container>
         <el-container class="list-right-container">

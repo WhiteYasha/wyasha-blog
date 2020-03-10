@@ -13,8 +13,8 @@
             </div>
         </el-main>
         <el-footer class="blink-pagination" :height="'auto'">
-            <el-pagination hide-on-single-page id="pagination" :current-page="page" layout="prev, pager, next, jumper" background :total="total" :page-size="pageSize" @current-change="onChange_page"></el-pagination>
-            <el-pagination hide-on-single-page id="pagination-small" :current-page="page" layout="prev, pager, next" background small :total="total" :page-size="pageSize" @current-change="onChange_page"></el-pagination>
+            <el-pagination hide-on-single-page id="pagination" layout="prev, pager, next, jumper" background :total="total" :page-size="pageSize" @current-change="onChange_page"></el-pagination>
+            <el-pagination hide-on-single-page id="pagination-small" layout="prev, pager, next" background small :total="total" :page-size="pageSize" @current-change="onChange_page"></el-pagination>
         </el-footer>
     </el-container>
     <el-footer :height="'auto'">
