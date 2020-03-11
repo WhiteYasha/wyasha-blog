@@ -23,6 +23,7 @@ const ja = {
         "cancel": "キャンセル",
         "clear": "クリア",
         "login": "ログインする",
+        "githubLogin": "Githubでログイン",
         "email": "Eメール",
         "signup": "サインアップ",
         "password": "パスワード",
@@ -34,20 +35,29 @@ const ja = {
         "next": "次に行く",
         "skip": "スキップ",
         "sendCode": "確認コードを送信",
+        "sendCodeSuccess": "正常に送信されました",
+        "errorCode": "確認コードエラー",
         "resend": "再送する",
         "username": "ユーザー名",
         "firstStep": "登録する準備ができました",
         "secondStep": "ユーザー名とパスワードを設定します",
-        "thirdStep": "お気に入りのアバターをアップロード"
+        "thirdStep": "お気に入りのアバターをアップロード",
+        "signSuccess": "登録完了"
     },
     form: {
         "requireEmail": "メールアを入力してください",
         "errorEmail": "正しいメールを入力してください",
+        "existedEmail": "このメールボックスは登録されました",
         "requirePassword": "パスワードを入力してください",
         "lengthPassword": "パスワードは6文字以上である必要があります",
         "requireCode": "確認コードを入力してください",
         "lengthCode": "確認コードは6桁でなければなりません",
-        "codeHint": "確認コードは1分で期限切れになります"
+        "codeHint": "確認コードは1分で期限切れになります",
+        "requireName": "ユーザー名を入力してください",
+        "errorName": "ユーザー名に特殊記号を含めることはできません",
+        "existedName": "このユーザー名は既に使用されています",
+        "avatarFormat": "画像はJPG形式のみにすることができます",
+        "avatarSize": "画像サイズは1MBを超えることはできません"
     },
     skill: {
         "knowledge": "HTML5 / CSS3およびボックスモデルに精通している",

@@ -23,6 +23,7 @@ const zh_cn = {
         "cancel": "取消",
         "clear": "清空",
         "login": "登录",
+        "githubLogin": "Github登录",
         "signup": "注册",
         "email": "邮箱",
         "password": "密码",
@@ -34,20 +35,29 @@ const zh_cn = {
         "next": "下一步",
         "skip": "跳过",
         "sendCode": "发送验证码",
+        "sendCodeSuccess": "发送成功",
+        "errorCode": "验证码错误",
         "resend": "重发",
         "username": "用户名",
         "firstStep": "准备注册",
         "secondStep": "设置你的用户名和密码",
-        "thirdStep": "上传你喜欢的头像吧"
+        "thirdStep": "上传你喜欢的头像吧",
+        "signSuccess": "注册成功"
     },
     form: {
         "requireEmail": "请填写邮箱地址",
         "errorEmail": "请填写正确的邮箱格式",
+        "existedEmail": "该邮箱已注册",
         "requirePassword": "请填写密码",
         "lengthPassword": "密码长度不能少于6位",
         "requireCode": "请填写验证码",
         "lengthCode": "验证码的长度必须为6位",
-        "codeHint": "验证码将在一分钟后失效"
+        "codeHint": "验证码将在一分钟后失效",
+        "requireName": "请输入用户名",
+        "errorName": "用户名中不能含有特殊符号",
+        "existedName": "该用户名已使用",
+        "avatarFormat": "图片只能是 JPG 格式",
+        "avatarSize": "图片大小不能超过 1MB"
     },
     skill: {
         "knowledge": "熟悉HTML5/CSS3及盒模型",

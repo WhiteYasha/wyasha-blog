@@ -11,13 +11,13 @@
             <transition name="el-zoom-in-center">
                 <el-card class="sign-card" :class="signStep == 1 ? 'active' : ''" v-if="signStep >= 1">
                     <h1>{{ $t("message.firstStep") }}</h1>
-                    <el-form v-if="signStep == 1" :model="codeForm" :rules="codeRules" ref="codeForm">
+                    <el-form v-if="signStep == 1" :model="codeForm" :rules="codeRules" ref="codeForm" v-loading="signLoading">
                         <el-form-item prop="email">
                             <el-input v-model="codeForm.email" :placeholder="$t('message.email')"></el-input>
                         </el-form-item>
                         <el-form-item prop="code">
                             <el-input :maxlength="6" v-model="codeForm.code">
-                                <el-button slot="append" size="mini" :disabled="isCountDown" v-loading="sendLoading" @click="onClick_sendCode">
+                                <el-button slot="append" size="mini" :disabled="isCountDown" v-loading="sendLoading" @click="onClick_sendCode('codeForm')">
                                     {{ isCountDown ? `${$t("message.resend")}(${countDown})` : $t("message.sendCode") }}
                                 </el-button>
                             </el-input>
@@ -54,8 +54,8 @@
             <transition name="el-zoom-in-center">
                 <el-card class="sign-card" :class="signStep == 3 ? 'active' : ''" v-if="signStep >= 3">
                     <h1>{{ $t("message.thirdStep") }}</h1>
-                    <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="onSuccess_upload" :before-upload="onBefore_upload">
-                        <img v-if="avatarUrl" src="" class="avatar">
+                    <el-upload class="avatar-uploader" :action="`http://localhost:9000/auth/upload?email=${codeForm.email}`" name="avatar" :show-file-list="false" :on-success="onSuccess_upload" :before-upload="onBefore_upload">
+                        <el-image v-if="avatarUrl" :src="avatarUrl" class="avatar" fit="cover"></el-image>
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                     <el-button class="next-btn" type="primary" @click="onClick_confirm(avatarUrl)">{{ $t("message.confirm") }}</el-button>
@@ -81,7 +81,7 @@ export default {
     },
     data() {
         return {
-            signStep: 1,
+            signStep: 2,
             signLoading: false,
             sendLoading: false,
             isCountDown: false,
@@ -108,6 +108,17 @@ export default {
                     {
                         type: "email",
                         message: this.$t("form.errorEmail")
+                    },
+                    {
+                        validator: async (rule, value, callback) => {
+                            let params = {
+                                email: value
+                            };
+                            let response = await this.$g.call("/auth/hasemail", "GET", params);
+                            if (response.data.result) callback(this.$t("form.existedEmail"));
+                            else callback();
+                        },
+                        trigger: "change"
                     }
                 ],
                 code: [{
@@ -125,6 +136,24 @@ export default {
         },
         infoRules: function () {
             return {
+                name: [{
+                        required: true,
+                        message: this.$t("form.requireName")
+                    },
+                    {
+                        validator: async (rule, value, callback) => {
+                            const reg = /[~!@#$%^&*()/\|,.<>?"'();:_+-=\[\]{}]/g;
+                            if (value.match(reg)) callback(this.$t("form.errorName"));
+                            let params = {
+                                name: value
+                            };
+                            let response = await this.$g.call("/auth/hasname", "GET", params);
+                            if (response.data.result) callback(this.$t("form.existedName"));
+                            else callback();
+                        },
+                        trigger: "change"
+                    }
+                ],
                 password: [{
                         required: true,
                         message: this.$t("form.requirePassword")
@@ -138,23 +167,55 @@ export default {
         }
     },
     methods: {
-        onClick_sendCode: function () {
+        onClick_sendCode: function (formName) {
             if (!this.isCountDown) {
-                this.isCountDown = true;
-                this.countDown = 60;
-                this.countDownInterval = setInterval(() => {
-                    this.countDown--;
-                    if (this.countDown <= 0) {
-                        clearInterval(this.countDownInterval);
-                        this.isCountDown = false;
+                this.$refs[formName].validateField("email", async (err) => {
+                    if (!err) {
+                        this.sendLoading = true;
+                        let params = {
+                            email: this.codeForm.email
+                        };
+                        let response = await this.$g.call("/auth/code/send", "GET", params);
+                        if (!response.data.error) {
+                            this.$message({
+                                message: this.$t("message.sendCodeSuccess"),
+                                type: "success"
+                            });
+                            this.sendLoading = false;
+                            this.isCountDown = true;
+                            this.countDown = 60;
+                            this.countDownInterval = setInterval(() => {
+                                this.countDown--;
+                                if (this.countDown <= 0) {
+                                    clearInterval(this.countDownInterval);
+                                    this.isCountDown = false;
+                                }
+                            }, 1000);
+                        }
                     }
-                }, 1000);
+                });
             }
         },
         onClick_nextStep2: function (formName) {
-            this.$refs[formName].validate((valid) => {
+            this.$refs[formName].validate(async (valid) => {
                 if (valid) {
-                    this.signStep++;
+                    this.signLoading = true;
+                    let params = {
+                        email: this.codeForm.email
+                    };
+                    let response = await this.$g.call("/auth/code", "GET", params);
+                    if (!response.data.error) {
+                        let code = response.data.result;
+                        if (code == this.codeForm.code) {
+                            this.signStep++;
+                        } else {
+                            this.$message({
+                                message: this.$t("message.errorCode"),
+                                type: "error"
+                            });
+                        }
+                    }
+                    this.signLoading = false;
                 }
             });
         },
@@ -165,17 +226,43 @@ export default {
                 }
             });
         },
-        onClick_confirm: function (avatar) {
-            console.log(avatar);
-            this.$router.push({
-                name: "Home"
-            });
+        onClick_confirm: async function (avatar) {
+            this.signLoading = true;
+            let params = {
+                name: this.infoForm.name,
+                email: this.codeForm.email,
+                password: this.infoForm.password,
+                avatar: avatar
+            };
+            let userResponse = await this.$g.call("/auth/sign", "GET", params);
+            if (!userResponse.data.error) {
+                this.$store.state.user = userResponse.data.result;
+                this.$store.state.isLoggedIn = true;
+                this.$message({
+                    message: this.$t("message.signSuccess"),
+                    type: "success"
+                });
+                this.$router.push({
+                    name: "Home"
+                });
+            }
+            this.signLoading = false;
         },
-        onSuccess_upload: function () {
-
+        onSuccess_upload: function (data) {
+            if (!data.error) {
+                this.avatarUrl = data.result;
+            }
         },
-        onBefore_upload: function () {
-
+        onBefore_upload: function (file) {
+            if (file.type !== 'image/jpeg') {
+                this.$message.error(this.$t("form.avatarFormat"));
+                return false;
+            }
+            if (file.size / 1024 / 1024 >= 1) {
+                this.$message.error(this.$t("form.avatarSize"));
+                return false;
+            }
+            return true;
         }
     }
 }
@@ -203,7 +290,7 @@ $themeColor: #C81912;
 .home-container {
     width: 100%;
 
-    .el-image {
+    .el-header .el-image {
         width: 100%;
         height: 100%;
     }

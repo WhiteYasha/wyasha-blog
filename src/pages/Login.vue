@@ -33,7 +33,7 @@
                     <div class="login-content-info">
                         <el-button type="text" @click="onClick_forget" size="mini">{{ $t("message.forget") }}</el-button>
                         <div>
-                            <el-button type="text" @click="onClick_signup" size="mini">Github登录</el-button>
+                            <el-button type="text" @click="onClick_signup" size="mini">{{ $t("message.githubLogin") }}</el-button>
                             <el-button type="text" @click="onClick_signup" size="mini">{{ $t("message.signup") }}</el-button>
                         </div>
                     </div>

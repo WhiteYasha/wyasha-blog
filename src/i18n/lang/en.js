@@ -23,6 +23,7 @@ const en = {
         "cancel": "Cancel",
         "clear": "Clear",
         "login": "Login",
+        "githubLogin": "Login with Github",
         "signup": "Sign up",
         "email": "Email",
         "password": "Password",
@@ -34,20 +35,29 @@ const en = {
         "next": "Next",
         "skip": "Skip",
         "sendCode": "Verification Code",
+        "sendCodeSuccess": "Send Successfully",
+        "errorCode": "Verification Code Error",
         "resend": "Resend",
         "username": "Username",
         "firstStep": "Ready to register",
         "secondStep": "Set your username and password",
-        "thirdStep": "Upload your favorite avatar"
+        "thirdStep": "Upload your favorite avatar",
+        "signSuccess": "Registration Success"
     },
     form: {
         "requireEmail": "Please fill in the email address",
         "errorEmail": "Please fill in the correct email",
+        "existedEmail": "The email has been registered",
         "requirePassword": "Please fill in the password",
         "lengthPassword": "Password must be at least 6 characters long",
         "requireCode": "Please fill in the verification code",
         "lengthCode": "Verification code must be 6 digits",
-        "codeHint": "Verification code will expire in 1 minute"
+        "codeHint": "Verification code will expire in 1 minute",
+        "requireName": "Please fill in the username",
+        "errorName": "Username must not contain special symbols",
+        "existedName": "This username is already used",
+        "avatarFormat": "Picture can only be in JPG format",
+        "avatarSize": "Image size cannot exceed 1MB"
     },
     skill: {
         "knowledge": "Familiar with HTML5 / CSS3 and box model",
