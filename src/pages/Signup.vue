@@ -81,7 +81,7 @@ export default {
     },
     data() {
         return {
-            signStep: 2,
+            signStep: 1,
             signLoading: false,
             sendLoading: false,
             isCountDown: false,

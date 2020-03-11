@@ -5,7 +5,7 @@
     </div>
     <div class="comment-right">
         <div class="comment-right-header">
-            <p>{{ reply.user.name }}</p>
+            <p :style="{ color: reply.user.email == 'white_yasha@163.com' ? '#C81912' : '' }">{{ reply.user.name }}</p>
             <p v-if="reply.replyUser">{{ $t("message.reply", {0: reply.replyUser.name}) }}</p>
             <div class="flex-gap"></div>
             <i>{{ $g.fromNow(reply.replyTime, $i18n.locale) }}</i>
@@ -65,9 +65,13 @@ $mutedColor: #a7abb3;
 
         .comment-right-header {
             display: flex;
+            width: calc(100% - 44px);
             align-items: center;
 
             p {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow-anchor: hidden;
                 color: $titleColor;
                 margin: 0;
             }

@@ -1,9 +1,7 @@
 <template>
 <div class="blink-item-container">
     <div class="blink-item-main" v-if="blink">
-        <p class="blink-item-content">
-            {{ blink.content }}
-        </p>
+        <p class="blink-item-content" v-html="content"></p>
         <div class="blink-item-images" v-show="blink.image.length > 0">
             <el-image fit="cover" v-for="(img, i) in blink.image" :key="i" :src="img" :preview-src-list="blink.image"></el-image>
         </div>
@@ -58,6 +56,9 @@ export default {
             let min = Math.max(0, (this.page - 1) * this.pageSize),
                 max = Math.min(this.blink.replies.length, this.page * this.pageSize);
             return this.blink.replies.slice(min, max);
+        },
+        content: function() {
+            return this.blink.content.replace(/\\n/g, "<br>");
         }
     },
     methods: {
