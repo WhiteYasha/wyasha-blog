@@ -103,14 +103,14 @@ export default {
                 if (valid) {
                     this.loginLoading = true;
                     let params = {
-                        email: this.form.email,
-                        password: this.form.password
+                        email: this.loginForm.email,
+                        password: this.loginForm.password
                     };
                     let response = await this.$g.call("/auth/login", "GET", params);
                     if (!response.data.error) {
-                        if (this.form.remember) {
-                            sessionStorage.setItem("email", this.form.email);
-                            sessionStorage.setItem("password", this.form.password);
+                        if (this.loginForm.remember) {
+                            sessionStorage.setItem("email", this.loginForm.email);
+                            sessionStorage.setItem("password", this.loginForm.password);
                         }
                         this.initUnreadReplies(response.data.result._id);
                         this.$message({
