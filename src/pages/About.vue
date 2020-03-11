@@ -1,6 +1,6 @@
 <template>
 <el-container class="about-container">
-    <el-header :height="'auto'">
+    <el-header height="auto">
         <main-menu></main-menu>
     </el-header>
     <el-container class="about-father-container">
@@ -35,7 +35,7 @@
                     </el-form-item>
                 </el-form>
             </el-main>
-            <el-footer :height="'auto'">
+            <el-footer height="auto">
                 <main-footer></main-footer>
             </el-footer>
         </el-container>

@@ -7,36 +7,39 @@
             </el-main>
         </el-container>
         <el-container class="login-right-container">
-            <el-header :height="'auto'" :style="{ padding: '10px' }">
+            <el-header height="auto" :style="{ padding: '10px' }">
                 <main-menu :showMenu="false" :showAvatar="false"></main-menu>
             </el-header>
             <el-main class="login-right-main">
-                <div class="login-content" v-loading="loading">
+                <div class="login-content" v-loading="loginLoading">
                     <div :style="{ textAlign: 'left' }">
                         <el-button type="" size="mini" circle icon="el-icon el-icon-arrow-left" @click="onClick_back"></el-button>
                     </div>
                     <h1>{{ $t("message.login") }}</h1>
-                    <el-form :model="form" ref="form" :rules="rules" :show-message="false">
+                    <el-form :model="loginForm" ref="loginForm" :rules="loginRules">
                         <el-form-item prop="email">
-                            <el-input v-model="form.email" :placeholder="$t('message.email')"></el-input>
+                            <el-autocomplete v-model="loginForm.email" :fetch-suggestions="onChange_getSuggestions" :placeholder="$t('message.email')" :trigger-on-focus="false"></el-autocomplete>
                         </el-form-item>
                         <el-form-item prop="password">
-                            <el-input v-model="form.password" type="password" :placeholder="$t('message.password')"></el-input>
+                            <el-input v-model="loginForm.password" type="password" :placeholder="$t('message.password')"></el-input>
                         </el-form-item>
                         <el-form-item :style="{ textAlign: 'left' }" prop="remember">
-                            <el-checkbox v-model="form.remember">{{ $t("message.remember") }}</el-checkbox>
+                            <el-checkbox v-model="loginForm.remember">{{ $t("message.remember") }}</el-checkbox>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="onClick_login('form')">{{ $t("message.login") }}</el-button>
+                            <el-button type="primary" @click="onClick_login('loginForm')">{{ $t("message.login") }}</el-button>
                         </el-form-item>
                     </el-form>
                     <div class="login-content-info">
                         <el-button type="text" @click="onClick_forget" size="mini">{{ $t("message.forget") }}</el-button>
-                        <el-button type="text" @click="onClick_signup" size="mini">{{ $t("message.signup") }}</el-button>
+                        <div>
+                            <el-button type="text" @click="onClick_signup" size="mini">Github登录</el-button>
+                            <el-button type="text" @click="onClick_signup" size="mini">{{ $t("message.signup") }}</el-button>
+                        </div>
                     </div>
                 </div>
             </el-main>
-            <el-footer class="login-right-footer" :height="'auto'">
+            <el-footer class="login-right-footer" height="auto">
                 <main-footer></main-footer>
             </el-footer>
         </el-container>
@@ -54,36 +57,39 @@ export default {
         mainFooter,
         mainMenu
     },
-    watch: {
-        locale: function () {
-            this.$forceUpdate();
-        }
-    },
     computed: {
         locale: function () {
             return this.$i18n.locale;
+        },
+        dialogWidth: function () {
+            return window.innerWidth < 1000 ? "80%" : "50%";
+        },
+        loginRules: function () {
+            return {
+                email: [{
+                        required: true,
+                        message: this.$t("form.requireEmail")
+                    },
+                    {
+                        type: "email",
+                        message: this.$t("form.errorEmail")
+                    }
+                ],
+                password: [{
+                    required: true,
+                    message: this.$t("form.requirePassword")
+                }]
+            };
         }
     },
     data() {
         return {
-            form: {
+            loginForm: {
                 email: "",
                 password: "",
                 remember: false
             },
-            rules: {
-                email: [{
-                        required: true
-                    },
-                    {
-                        type: "email"
-                    }
-                ],
-                password: [{
-                    required: true
-                }]
-            },
-            loading: false
+            loginLoading: false
         }
     },
     methods: {
@@ -95,7 +101,7 @@ export default {
         onClick_login: function (formName) {
             this.$refs[formName].validate(async (valid) => {
                 if (valid) {
-                    this.loading = true;
+                    this.loginLoading = true;
                     let params = {
                         email: this.form.email,
                         password: this.form.password
@@ -115,12 +121,7 @@ export default {
                         this.$store.state.isLoggedIn = true;
                         this.$router.go(-1);
                     }
-                    this.loading = false;
-                } else {
-                    this.$message({
-                        type: "info",
-                        message: this.$t("message.errorForm")
-                    });
+                    this.loginLoading = false;
                 }
             });
         },
@@ -130,8 +131,8 @@ export default {
             });
         },
         onClick_signup: function () {
-            this.$alert(this.$t("developing"), {
-                type: 'warning'
+            this.$router.push({
+                name: "Signup"
             });
         },
         initUnreadReplies: async function (to_uid) {
@@ -145,6 +146,14 @@ export default {
                 if (!repliesReponse.data.error) {
                     this.$store.isUnread = repliesReponse.data.result > 0;
                 }
+            }
+        },
+        onChange_getSuggestions: function(str, callback) {
+            if (str.indexOf("@") > -1) callback([]);
+            else {
+                const suffix = ["@163.com", "@qq.com", "@gmail.com", "@sina.com", "@yahoo.com"];
+                const results = suffix.map((item) => Object.assign({}, {value: str + item}));
+                callback(results);
             }
         }
     }
@@ -184,7 +193,8 @@ $whiteColor: #fff;
                 border-radius: 5px;
                 background: $whiteColor;
 
-                .el-form .el-button {
+                .el-form .el-button,
+                .el-form .el-autocomplete {
                     width: 100%;
                 }
 
@@ -192,10 +202,6 @@ $whiteColor: #fff;
                     display: flex;
                     justify-content: space-between;
                     font-size: 12px;
-
-                    a {
-                        color: $mutedColor;
-                    }
                 }
             }
         }
@@ -227,7 +233,7 @@ $whiteColor: #fff;
         z-index: 1;
 
         .login-content {
-            width: 80%;
+            width: 90%;
         }
 
         .login-right-footer {
@@ -239,10 +245,6 @@ $whiteColor: #fff;
 
             >* {
                 flex: 0 0 100%;
-            }
-
-            .el-button+.el-button {
-                margin: 0;
             }
         }
     }

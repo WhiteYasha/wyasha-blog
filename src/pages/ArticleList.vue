@@ -1,6 +1,6 @@
 <template>
 <el-container class="home-container">
-    <el-header :height="'auto'">
+    <el-header height="auto">
         <main-menu></main-menu>
     </el-header>
     <el-container class="list-container">
@@ -11,7 +11,7 @@
                     <h4>{{ $t("message.noArticle") }}</h4>
                 </div>
             </el-main>
-            <el-footer :height="'auto'" class="list-left-footer">
+            <el-footer height="auto" class="list-left-footer">
                 <el-pagination hide-on-single-page id="pagination" :current-page="page" :page-size="pageSize" :total="total" background layout="prev, pager, next, jumper" @current-change="onChange_page"></el-pagination>
                 <el-pagination hide-on-single-page id="pagination-small" :current-page="page" :page-size="pageSize" :total="total" background small layout="prev, pager, next" @current-change="onChange_page"></el-pagination>
             </el-footer>
@@ -24,7 +24,7 @@
             </el-main>
         </el-container>
     </el-container>
-    <el-footer :height="'auto'">
+    <el-footer height="auto">
         <main-footer></main-footer>
     </el-footer>
 </el-container>

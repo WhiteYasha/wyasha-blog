@@ -43,12 +43,6 @@
 </el-row>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style lang="scss" scoped>
 $themeColor: #C81912;
 $titleColor: #18191b;

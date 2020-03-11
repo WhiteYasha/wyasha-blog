@@ -31,7 +31,23 @@ const ja = {
         "noComment": "まだコメントがありません",
         "noArticle": "記事がありません",
         "noBlink": "インスタントがありません",
-        "errorForm": "正しいメールアドレスとパスワードを入力してください"
+        "next": "次に行く",
+        "skip": "スキップ",
+        "sendCode": "確認コードを送信",
+        "resend": "再送する",
+        "username": "ユーザー名",
+        "firstStep": "登録する準備ができました",
+        "secondStep": "ユーザー名とパスワードを設定します",
+        "thirdStep": "お気に入りのアバターをアップロード"
+    },
+    form: {
+        "requireEmail": "メールアを入力してください",
+        "errorEmail": "正しいメールを入力してください",
+        "requirePassword": "パスワードを入力してください",
+        "lengthPassword": "パスワードは6文字以上である必要があります",
+        "requireCode": "確認コードを入力してください",
+        "lengthCode": "確認コードは6桁でなければなりません",
+        "codeHint": "確認コードは1分で期限切れになります"
     },
     skill: {
         "knowledge": "HTML5 / CSS3およびボックスモデルに精通している",

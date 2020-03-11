@@ -8,6 +8,7 @@ import About from '@/pages/About';
 import ArticleList from '@/pages/ArticleList';
 import Article from '@/pages/Article';
 import Login from '@/pages/Login';
+import Signup from '@/pages/Signup';
 import Blink from '@/pages/Blink';
 
 Vue.use(VueRouter)
@@ -46,6 +47,11 @@ const routes = [{
 		path: "/login",
 		name: "Login",
 		component: Login
+	},
+	{
+		path: "/signup",
+		name: "Signup",
+		component: Signup
 	},
 	{
 		path: "/blink",

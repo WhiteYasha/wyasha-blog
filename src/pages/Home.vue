@@ -1,7 +1,7 @@
 <template>
 <el-container class="home-container">
     <el-container class="home-left">
-        <el-header :height="'auto'">
+        <el-header height="auto">
             <main-menu></main-menu>
         </el-header>
         <el-main class="home-main-container">
@@ -11,7 +11,7 @@
                 <el-button type="primary" @click="onClick_start">{{ $t("message.start") }}</el-button>
             </div>
         </el-main>
-        <el-footer :height="'auto'">
+        <el-footer height="auto">
             <main-footer></main-footer>
         </el-footer>
     </el-container>

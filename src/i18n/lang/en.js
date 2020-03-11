@@ -31,7 +31,23 @@ const en = {
         "noComment": "No comment yet",
         "noArticle": "No article yet",
         "noBlink": "No blink yet",
-        "errorForm": "Please fill in the correct email address and password"
+        "next": "Next",
+        "skip": "Skip",
+        "sendCode": "Verification Code",
+        "resend": "Resend",
+        "username": "Username",
+        "firstStep": "Ready to register",
+        "secondStep": "Set your username and password",
+        "thirdStep": "Upload your favorite avatar"
+    },
+    form: {
+        "requireEmail": "Please fill in the email address",
+        "errorEmail": "Please fill in the correct email",
+        "requirePassword": "Please fill in the password",
+        "lengthPassword": "Password must be at least 6 characters long",
+        "requireCode": "Please fill in the verification code",
+        "lengthCode": "Verification code must be 6 digits",
+        "codeHint": "Verification code will expire in 1 minute"
     },
     skill: {
         "knowledge": "Familiar with HTML5 / CSS3 and box model",

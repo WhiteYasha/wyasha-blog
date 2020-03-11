@@ -1,6 +1,6 @@
 <template>
 <el-container class="home-container">
-    <el-header :height="'auto'">
+    <el-header height="auto">
         <el-dropdown @command="onClick_changeLocale">
             <span class="header-dropdown-link">
                 {{ $i18n.locale == 'zh_cn' ? "中文" : ($i18n.locale == 'ja' ? '日本語' : 'English') }}
@@ -24,7 +24,7 @@
             </div>
         </div>
     </el-main>
-    <el-footer :height="'auto'">
+    <el-footer height="auto">
         <main-footer></main-footer>
     </el-footer>
 </el-container>

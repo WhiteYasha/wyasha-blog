@@ -1,6 +1,6 @@
 <template>
 <el-container class="home-container">
-    <el-header :height="'auto'">
+    <el-header height="auto">
         <main-menu></main-menu>
     </el-header>
     <el-container>
@@ -12,12 +12,12 @@
                 <h1>{{ $t("message.noBlink") }}</h1>
             </div>
         </el-main>
-        <el-footer class="blink-pagination" :height="'auto'">
+        <el-footer class="blink-pagination" height="auto">
             <el-pagination hide-on-single-page id="pagination" :current-page="page" layout="prev, pager, next, jumper" background :total="total" :page-size="pageSize" @current-change="onChange_page"></el-pagination>
             <el-pagination hide-on-single-page id="pagination-small" :current-page="page" layout="prev, pager, next" background small :total="total" :page-size="pageSize" @current-change="onChange_page"></el-pagination>
         </el-footer>
     </el-container>
-    <el-footer :height="'auto'">
+    <el-footer height="auto">
         <main-footer></main-footer>
     </el-footer>
 </el-container>

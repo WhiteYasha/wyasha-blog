@@ -31,7 +31,23 @@ const zh_cn = {
         "noComment": "还没有人评论",
         "noArticle": "还没有文章",
         "noBlink": "还没有动态",
-        "errorForm": "请填写正确的邮箱地址和密码"
+        "next": "下一步",
+        "skip": "跳过",
+        "sendCode": "发送验证码",
+        "resend": "重发",
+        "username": "用户名",
+        "firstStep": "准备注册",
+        "secondStep": "设置你的用户名和密码",
+        "thirdStep": "上传你喜欢的头像吧"
+    },
+    form: {
+        "requireEmail": "请填写邮箱地址",
+        "errorEmail": "请填写正确的邮箱格式",
+        "requirePassword": "请填写密码",
+        "lengthPassword": "密码长度不能少于6位",
+        "requireCode": "请填写验证码",
+        "lengthCode": "验证码的长度必须为6位",
+        "codeHint": "验证码将在一分钟后失效"
     },
     skill: {
         "knowledge": "熟悉HTML5/CSS3及盒模型",

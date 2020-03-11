@@ -14,7 +14,7 @@ import {
 import router from './../router/index';
 import i18n from './../i18n/i18n';
 
-const host = "http://localhost:9000";
+axios.defaults.baseURL = "http://localhost:9000";
 
 const _handleErrorPage = (code, message) => {
     if (code == 500) {
@@ -58,16 +58,16 @@ axios.interceptors.response.use((data) => {
 });
 
 export function call(api, methods, params) {
-    if (methods.toUpperCase() == "GET") return axios.get(host + api, {
+    if (methods.toUpperCase() == "GET") return axios.get(api, {
         params
     });
-    else if (methods.toUpperCase() == "POST") return axios.post(host + api, {
+    else if (methods.toUpperCase() == "POST") return axios.post(api, {
         params
     });
-    else if (methods.toUpperCase() == "DELETE") return axios.delete(host + api, {
+    else if (methods.toUpperCase() == "DELETE") return axios.delete(api, {
         params
     });
-    else if (methods.toUpperCase() == "PUT") return axios.put(host + api, {
+    else if (methods.toUpperCase() == "PUT") return axios.put(api, {
         params
     });
 };

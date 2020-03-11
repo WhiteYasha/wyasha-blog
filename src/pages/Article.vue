@@ -1,6 +1,6 @@
 <template>
 <el-container class="home-container">
-    <el-header :height="'auto'">
+    <el-header height="auto">
         <main-menu :showMenu="false"></main-menu>
     </el-header>
     <el-main class="article-main">
@@ -37,7 +37,7 @@
             <el-button type="info" size="small" @click="onClick_clear">{{ $t("message.clear") }}</el-button>
         </div>
     </el-main>
-    <el-footer :height="'auto'">
+    <el-footer height="auto">
         <main-footer></main-footer>
     </el-footer>
 </el-container>
