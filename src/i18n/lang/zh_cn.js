@@ -23,7 +23,7 @@ const zh_cn = {
         "cancel": "取消",
         "clear": "清空",
         "login": "登录",
-        "githubLogin": "Github登录",
+        // "githubLogin": "GitHub登录",
         "signup": "注册",
         "email": "邮箱",
         "password": "密码",

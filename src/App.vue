@@ -11,8 +11,8 @@
 export default {
     methods: {
         onCreate_autoLogin: async function () {
-            let email = sessionStorage.email,
-                password = sessionStorage.password;
+            let email = localStorage.email,
+                password = localStorage.password;
             if (email && password) {
                 let params = {
                     email,
@@ -23,6 +23,9 @@ export default {
                     this.$store.state.user = response.data.result;
                     this.initUnreadReplies(this.$store.state.user._id);
                     this.$store.state.isLoggedIn = true;
+                } else {
+                    localStorage.removeItem("email");
+                    localStorage.removeItem("password");
                 }
             }
         },

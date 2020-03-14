@@ -33,7 +33,7 @@
                     <div class="login-content-info">
                         <el-button type="text" @click="onClick_forget" size="mini">{{ $t("message.forget") }}</el-button>
                         <div>
-                            <el-button type="text" @click="onClick_signup" size="mini">{{ $t("message.githubLogin") }}</el-button>
+                            <!-- <el-button type="text" @click="onClick_signup" size="mini">{{ $t("message.githubLogin") }}</el-button> -->
                             <el-button type="text" @click="onClick_signup" size="mini">{{ $t("message.signup") }}</el-button>
                         </div>
                     </div>
@@ -109,8 +109,8 @@ export default {
                     let response = await this.$g.call("/auth/login", "GET", params);
                     if (!response.data.error) {
                         if (this.loginForm.remember) {
-                            sessionStorage.setItem("email", this.loginForm.email);
-                            sessionStorage.setItem("password", this.loginForm.password);
+                            localStorage.setItem("email", this.loginForm.email);
+                            localStorage.setItem("password", this.loginForm.password);
                         }
                         this.initUnreadReplies(response.data.result._id);
                         this.$message({

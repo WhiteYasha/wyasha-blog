@@ -54,7 +54,8 @@
             <transition name="el-zoom-in-center">
                 <el-card class="sign-card" :class="signStep == 3 ? 'active' : ''" v-if="signStep >= 3">
                     <h1>{{ $t("message.thirdStep") }}</h1>
-                    <el-upload class="avatar-uploader" :action="`http://localhost:9000/auth/upload?email=${codeForm.email}`" name="avatar" :show-file-list="false" :on-success="onSuccess_upload" :before-upload="onBefore_upload">
+                    <!-- <el-upload class="avatar-uploader" :action="`https://www.wyasha.top:9000/auth/upload?email=${codeForm.email}`" name="avatar" :show-file-list="false" :on-success="onSuccess_upload" :before-upload="onBefore_upload"> -->
+                    <el-upload class="avatar-uploader" :action="`http://localhost.top:9000/auth/upload?email=${codeForm.email}`" name="avatar" :show-file-list="false" :on-success="onSuccess_upload" :before-upload="onBefore_upload">
                         <el-image v-if="avatarUrl" :src="avatarUrl" class="avatar" fit="cover"></el-image>
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>

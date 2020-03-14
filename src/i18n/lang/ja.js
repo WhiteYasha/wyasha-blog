@@ -23,7 +23,7 @@ const ja = {
         "cancel": "キャンセル",
         "clear": "クリア",
         "login": "ログインする",
-        "githubLogin": "Githubでログイン",
+        // "githubLogin": "GitHubでログイン",
         "email": "Eメール",
         "signup": "サインアップ",
         "password": "パスワード",

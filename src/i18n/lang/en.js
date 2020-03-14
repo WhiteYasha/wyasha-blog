@@ -23,7 +23,7 @@ const en = {
         "cancel": "Cancel",
         "clear": "Clear",
         "login": "Login",
-        "githubLogin": "Login with Github",
+        // "githubLogin": "Login with GitHub",
         "signup": "Sign up",
         "email": "Email",
         "password": "Password",
