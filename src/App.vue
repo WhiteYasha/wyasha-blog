@@ -67,6 +67,13 @@ body,
     margin: 0;
 }
 
+@media screen and (min-width: 1440px) {
+    #app {
+        width: 1440px;
+        margin: 0 auto;
+    }
+}
+
 a {
     text-decoration: none;
 }
@@ -82,6 +89,7 @@ a:hover {
 #nodata {
     width: 100%;
     height: 100%;
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,13 +97,6 @@ a:hover {
 
     * {
         font-weight: 400;
-    }
-}
-
-@media screen and (min-width: 1440px) {
-    #app {
-        width: 1440px;
-        margin: 0 auto;
     }
 }
 

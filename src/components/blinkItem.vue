@@ -47,7 +47,7 @@ export default {
     },
     computed: {
         placeholder: function () {
-            if (this.replyUser) return this.$t("message.reply", {
+            if (this.replyUser) return this.$t("message.replyto", {
                 0: this.replyUser.name
             });
             else return "";

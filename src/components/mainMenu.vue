@@ -1,7 +1,19 @@
 <template>
 <div class="header-container">
-    <el-badge is-dot :hidden="!$store.isUnread">
-        <el-avatar v-if="showAvatar" :size="40" :src="avatar" @click.native="onClick_showUser"></el-avatar>
+    <el-badge is-dot :hidden="!$store.state.isUnread">
+        <el-avatar v-if="showAvatar && !$store.state.isLoggedIn" :size="40" :src="avatar" @click.native="onClick_showUser"></el-avatar>
+        <el-dropdown v-if="showAvatar && $store.state.isLoggedIn" @command="onClick_avatar">
+            <el-avatar :size="40" :src="avatar" @click.native="onClick_showUser"></el-avatar>
+            <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="User">我的</el-dropdown-item>
+                <el-dropdown-item command="UserReply">
+                    <el-badge is-dot :hidden="!$store.state.isUnread">
+                        回复
+                    </el-badge>
+                </el-dropdown-item>
+                <el-dropdown-item command="Logout">登出</el-dropdown-item>
+            </el-dropdown-menu>
+        </el-dropdown>
     </el-badge>
     <div class="header-right">
         <el-dropdown @command="onClick_changeLocale">
@@ -10,9 +22,9 @@
                 <i class="el-icon el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="zh_cn" v-if="$i18n.locale != 'zh_cn'">中文</el-dropdown-item>
-                <el-dropdown-item command="en" v-if="$i18n.locale != 'en'">English</el-dropdown-item>
-                <el-dropdown-item command="ja" v-if="$i18n.locale != 'ja'">日本語</el-dropdown-item>
+                <el-dropdown-item command="zh_cn">中文</el-dropdown-item>
+                <el-dropdown-item command="en">English</el-dropdown-item>
+                <el-dropdown-item command="ja">日本語</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
         <el-button type="text" v-if="showMenu" :icon="`el-icon ${isShowMenu ? 'el-icon-close' : 'el-icon-menu'}`" @click="onClick_toggleShowMenu"></el-button>
@@ -77,6 +89,21 @@ export default {
             localStorage.setItem("lang", command);
             this.$i18n.locale = command;
             // this.$moment.locale(command);
+        },
+        onClick_avatar: function (command) {
+            if (command == "User" || command == "UserReply") {
+                this.$router.push({
+                    name: command,
+                    params: {
+                        id: this.$store.state.user._id
+                    }
+                });
+            } else {
+                this.$store.state.user = null;
+                this.$store.state.isLoggedIn = false;
+                localStorage.removeItem("email");
+                localStorage.removeItem("password");
+            }
         }
     }
 }

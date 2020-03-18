@@ -19,7 +19,7 @@
         </div>
         <div id="placeholder" v-else v-loading="true"></div>
         <el-divider content-position="left">{{ $t("message.totalComment", {0: total}) }}</el-divider>
-        <div v-loading="commentLoading">
+        <div id="comments" v-loading="commentLoading">
             <el-card shadow="never" v-for="reply in replies" :key="reply._id">
                 <article-comment :reply="reply" :comment="onClick_comment"></article-comment>
             </el-card>
@@ -73,7 +73,7 @@ export default {
             return isNaN(Number(this.$route.query.page)) ? 1 : Number(this.$route.query.page);
         },
         placeholder: function () {
-            if (this.commentUser) return this.$t("message.reply", {
+            if (this.commentUser) return this.$t("message.replyto", {
                 0: this.commentUser.name
             });
             else return "";

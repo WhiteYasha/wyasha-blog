@@ -10,6 +10,7 @@ import Article from '@/pages/Article';
 import Login from '@/pages/Login';
 import Signup from '@/pages/Signup';
 import Blink from '@/pages/Blink';
+import User from '@/pages/User';
 
 Vue.use(VueRouter)
 
@@ -57,13 +58,30 @@ const routes = [{
 		path: "/blink",
 		name: "Blink",
 		component: Blink
+	},
+	{
+		path: "/user/:id",
+		name: "User",
+		component: User
+	},
+	{
+		path: "/user/:id/reply",
+		name: "UserReply",
+		component: User
 	}
 ];
 
 const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
-	routes
+	routes,
+	scrollBehavior: (to, from, savedPosition) => {
+		if (to.hash) {
+			return {
+				selector: to.hash
+			};
+		}
+	}
 });
 
 router.afterEach((to, from, next) => {

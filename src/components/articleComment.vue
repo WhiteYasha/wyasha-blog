@@ -6,12 +6,12 @@
     <div class="comment-right">
         <div class="comment-right-header">
             <p :style="{ color: reply.user.email == 'white_yasha@163.com' ? '#C81912' : '' }">{{ reply.user.name }}</p>
-            <p v-if="reply.replyUser">{{ $t("message.reply", {0: reply.replyUser.name}) }}</p>
+            <p v-if="reply.replyUser">{{ $t("message.replyto", {0: reply.replyUser.name}) }}</p>
             <div class="flex-gap"></div>
             <i>{{ $g.fromNow(reply.replyTime, $i18n.locale) }}</i>
         </div>
         <div class="comment-right-main" v-if="reply.content" v-html="replyContent"></div>
-        <div class="comment-right-footer">
+        <div class="comment-right-footer" v-if="!readOnly">
             <el-button type="text" size="mini" @click="onClick_comment">{{ $t("message.comment") }}</el-button>
         </div>
     </div>
@@ -26,6 +26,10 @@ export default {
         comment: {
             type: Function,
             default: () => {}
+        },
+        readOnly: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -65,7 +69,6 @@ $mutedColor: #a7abb3;
 
         .comment-right-header {
             display: flex;
-            width: calc(100% - 44px);
             align-items: center;
 
             p {
