@@ -80,7 +80,7 @@ export default {
             width: 80%;
             text-align: left;
             position: absolute;
-            top: 40%;
+            top: 35%;
             left: 10%;
 
             h1,
