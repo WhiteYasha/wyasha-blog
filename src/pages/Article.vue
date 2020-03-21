@@ -136,7 +136,7 @@ export default {
                     type: 0,
                     uid: this.$store.state.user._id,
                     to_uid: this.replyUser ? this.replyUser._id : null,
-                    content: this.replyUser
+                    content: this.commentText
                 };
                 if (params.content.length > 140) {
                     this.$message.success(this.$t("form.lengthContent"));
