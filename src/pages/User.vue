@@ -9,7 +9,7 @@
             <div class="user-info">
                 <h4>{{ user.name }}</h4>
                 <i>{{ user.email }}</i>
-                <p>{{ $t("message.signtime") }}:&nbsp;{{ $g.f(user.signinTime, "yyyy/MM/dd") }}</p>
+                <p>{{ $t("message.signtime") }}:&nbsp;{{ $g.f(user.signTime, "yyyy/MM/dd") }}</p>
                 <div class="flex-gap"></div>
                 <div v-if="isMyself">
                     <el-button disabled type="text" size="small" icon="el-icon el-icon-setting">{{ $t("message.modify") }}</el-button>
