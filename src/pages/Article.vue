@@ -118,7 +118,7 @@ export default {
             this.replyUser = user;
         },
         onClick_clear: function () {
-            this.replyUser = "";
+            this.commentText = "";
         },
         onChange_page: function (page) {
             let path = this.$route.path.indexOf("#comments") > -1 ? this.$route.path : this.$route.path + "#comments";
@@ -136,7 +136,7 @@ export default {
                     type: 0,
                     uid: this.$store.state.user._id,
                     to_uid: this.replyUser ? this.replyUser._id : null,
-                    content: this.replyUser
+                    content: this.commentText
                 };
                 if (params.content.length > 140) {
                     this.$message.success(this.$t("form.lengthContent"));
