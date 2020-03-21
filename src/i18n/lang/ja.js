@@ -26,6 +26,7 @@ const ja = {
         "login": "ログインする",
         "logout": "ログアウト",
         "modify": "情報を変更する",
+        "noLogin": "すみません、前にログインしてください",
         // "githubLogin": "GitHubでログイン",
         "email": "Eメール",
         "signup": "サインアップ",
@@ -34,6 +35,7 @@ const ja = {
         "remember": "私を覚えてますか",
         "forget": "パスワードをお忘れですか",
         "noComment": "まだコメントがありません",
+        "commentSuccess": "コメント成功",
         "noArticle": "記事がありません",
         "noBlink": "インスタントがありません",
         "next": "次に行く",
@@ -61,7 +63,9 @@ const ja = {
         "errorName": "ユーザー名に特殊記号を含めることはできません",
         "existedName": "このユーザー名は既に使用されています",
         "avatarFormat": "画像はJPG形式のみにすることができます",
-        "avatarSize": "画像サイズは1MBを超えることはできません"
+        "avatarSize": "画像サイズは1MBを超えることはできません",
+        "requireComment": "コメントを空にすることはできません",
+        "lengthComment": "コメントの長さは140ワードを超えることはできません"
     },
     skill: {
         "knowledge": "HTML5 / CSS3およびボックスモデルに精通している",

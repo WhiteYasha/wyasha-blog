@@ -27,11 +27,11 @@
                 <h4>{{ $t("message.noComment") }}</h4>
             </div>
         </div>
-        <el-pagination hide-on-single-page layout="prev, pager, next" :current-page="page" :page-size="pageSize" :total="total" background small></el-pagination>
+        <el-pagination hide-on-single-page layout="prev, pager, next" :current-page="page" :page-size="pageSize" :total="total" background small @current-change="onChange_page"></el-pagination>
         <el-divider content-position="right">
             <el-button type="text" @click="onClick_comment(null)">{{ $t("message.comment") }}</el-button>
         </el-divider>
-        <el-input type="textarea" :rows="3" v-model="commentText" :placeholder="placeholder"></el-input>
+        <el-input type="textarea" :rows="3" maxlength="140" v-model="commentText" :placeholder="placeholder"></el-input>
         <div :style="{ marginTop: '10px', textAlign: 'right' }">
             <el-button type="success" size="small" @click="onClick_send">{{ $t("message.send") }}</el-button>
             <el-button type="info" size="small" @click="onClick_clear">{{ $t("message.clear") }}</el-button>
@@ -65,16 +65,21 @@ export default {
             pageSize: 5,
             total: 0,
             commentText: "",
-            commentUser: null
+            replyUser: null
         };
+    },
+    watch: {
+        page: function () {
+            this.initReplies();
+        }
     },
     computed: {
         page: function () {
             return isNaN(Number(this.$route.query.page)) ? 1 : Number(this.$route.query.page);
         },
         placeholder: function () {
-            if (this.commentUser) return this.$t("message.replyto", {
-                0: this.commentUser.name
+            if (this.replyUser) return this.$t("message.replyto", {
+                0: this.replyUser.name
             });
             else return "";
         }
@@ -110,15 +115,51 @@ export default {
             }
         },
         onClick_comment: function (user) {
-            this.commentUser = user;
+            this.replyUser = user;
         },
         onClick_clear: function () {
-            this.commentText = "";
+            this.replyUser = "";
         },
-        onClick_send: function () {
-            this.$alert(this.$t("developing"), {
-                type: 'warning'
+        onChange_page: function (page) {
+            let path = this.$route.path.indexOf("#comments") > -1 ? this.$route.path : this.$route.path + "#comments";
+            this.$router.push({
+                path: path,
+                query: {
+                    page: page
+                }
             });
+        },
+        onClick_send: async function () {
+            if (this.$store.state.isLoggedIn && this.$store.state.user) {
+                let params = {
+                    rid: this.$route.params.id,
+                    type: 0,
+                    uid: this.$store.state.user._id,
+                    to_uid: this.replyUser ? this.replyUser._id : null,
+                    content: this.replyUser
+                };
+                if (params.content.length > 140) {
+                    this.$message.success(this.$t("form.lengthContent"));
+                } else if (!params.content || params.content == "") {
+                    this.$message.error(this.$t("form.requireComment"));
+                } else {
+                    this.commentLoading = true;
+                    let response = await this.$g.call("/reply/add", "GET", params);
+                    if (!response.data.error) {
+                        let reply = Object.assign({}, response.data.result, {
+                            user: this.$store.state.user,
+                            replyUser: this.replyUser
+                        });
+                        this.total++;
+                        this.replies = [reply].concat(this.replies);
+                        this.onClick_clear();
+                        this.$message.success(this.$t("message.commentSuccess"));
+                    }
+                    this.commentLoading = false;
+                }
+            } else {
+                this.$message.error(this.$t("message.noLogin"));
+            }
         }
     },
     created() {

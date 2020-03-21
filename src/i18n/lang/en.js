@@ -26,6 +26,7 @@ const en = {
         "login": "Login",
         "logout": "Logout",
         "modify": "Modify Information",
+        "noLogin": "Sorry, please login before",
         // "githubLogin": "Login with GitHub",
         "signup": "Sign up",
         "signtime": "Registration time",
@@ -34,6 +35,7 @@ const en = {
         "remember": "Remember me",
         "forget": "Forget password",
         "noComment": "No comment yet",
+        "commentSuccess": "Comment successfully",
         "noArticle": "No article yet",
         "noBlink": "No blink yet",
         "next": "Next",
@@ -46,7 +48,9 @@ const en = {
         "firstStep": "Ready to register",
         "secondStep": "Set your username and password",
         "thirdStep": "Upload your favorite avatar",
-        "signSuccess": "Registration Success"
+        "signSuccess": "Registration Success",
+        "requireComment": "Comment cannot be empty",
+        "lengthComment": "Comment length cannot exceed 140 words"
     },
     form: {
         "requireEmail": "Please fill in the email address",

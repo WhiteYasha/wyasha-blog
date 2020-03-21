@@ -26,6 +26,7 @@ const zh_cn = {
         "login": "登录",
         "logout": "退出登录",
         "modify": "修改信息",
+        "noLogin": "抱歉，请先登录",
         // "githubLogin": "GitHub登录",
         "signup": "注册",
         "signtime": "注册时间",
@@ -34,6 +35,7 @@ const zh_cn = {
         "remember": "记住我",
         "forget": "忘记密码",
         "noComment": "还没有人评论",
+        "commentSuccess": "评论成功",
         "noArticle": "还没有文章",
         "noBlink": "还没有动态",
         "next": "下一步",
@@ -61,7 +63,9 @@ const zh_cn = {
         "errorName": "用户名中不能含有特殊符号",
         "existedName": "该用户名已使用",
         "avatarFormat": "图片只能是 JPG 格式",
-        "avatarSize": "图片大小不能超过 1MB"
+        "avatarSize": "图片大小不能超过 1MB",
+        "requireComment": "评论不能为空",
+        "lengthComment": "评论长度不能超过140个子"
     },
     skill: {
         "knowledge": "熟悉HTML5/CSS3及盒模型",
