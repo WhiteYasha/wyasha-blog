@@ -84,5 +84,29 @@ $vueFont: Avenir, Helvetica, Arial, sans-serif;
         background-color: rgba($themeColor, .05);
         border-radius: 3px;
     }
+
+    table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        max-width: 100%;
+        overflow: hidden;
+
+        thead {
+            background: $themeColor;
+            color: #ffffff;
+        }
+
+        tr:nth-child(even) {
+            background: rgba($lightColor, .5);
+        }
+
+        th,
+        td {
+            padding: .2em 1.5em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
 }
 </style>
