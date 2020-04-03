@@ -44,6 +44,9 @@ export default {
         }
     },
     created() {
+        if (this.$g.filterDate()) {
+            document.getElementsByTagName("html")[0].style.filter = "grayscale(100%)";
+        }
         this.onCreate_autoLogin();
     }
 }

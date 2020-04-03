@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
     format,
-    formatRelative
+    formatRelative,
+    isToday
 } from 'date-fns';
 import {
     ja,
@@ -28,6 +29,7 @@ const _handleErrorPage = (code, message) => {
         });
     }
 };
+const filterDates = [new Date(2020, 3, 4), new Date(new Date().getFullYear(), 11, 13)];
 
 axios.interceptors.request.use((config) => {
     return config;
@@ -87,3 +89,7 @@ export function fromNow(date, locale) {
         locale: enUS
     });
 };
+
+export function filterDate() {
+    return filterDates.some(date => isToday(date));
+}
